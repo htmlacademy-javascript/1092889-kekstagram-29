@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Даниил Фомин](https://up.htmlacademy.ru/javascript/29/user/1092889).
-* Наставник: `Неизвестно`.
+* Наставник: [Arthur Litovko](https://github.com/baileys-li).
 
 ---
 
