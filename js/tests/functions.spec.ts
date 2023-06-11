@@ -1,16 +1,15 @@
-import {getNumberFrom, isPalindrome, isShorterThan} from '../functions.js';
-import {describe,expect,test} from '@jest/globals';
+import {getNumberFrom, isPalindrome, isShorterThan} from '../functions.ts';
 
 
 describe('Is string require optimal length criteria', () => {
 	const testCases = [
-		{values: ['проверяемая строка', 20], result: true},
-		{values: ['проверяемая строка', 18], result: true},
-		{values: ['проверяемая строка', 10], result: false}
+		{value: ['проверяемая строка', 20], result: true},
+		{value: ['проверяемая строка', 18], result: true},
+		{value: ['проверяемая строка', 10], result: false}
 	];
 	for (const testCase of testCases) {
-		test(`Is string "${testCase.values[0]}" shorter than ${testCase.values[1]} symbols`,
-			() => expect(isShorterThan(...testCase.values)).toStrictEqual(testCase.result));
+		test(`Is string "${testCase.value[0]}" shorter than ${testCase.value[1]} symbols`,
+			() => expect(isShorterThan(...testCase.value as [string,number])).toStrictEqual(testCase.result));
 	}
 });
 
