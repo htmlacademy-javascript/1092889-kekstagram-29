@@ -1,4 +1,4 @@
-const isShorterThan = (string: string, length: number): boolean => string.length <= length;
+const isShorterThan = ({length}: string, maxLength = 0): boolean => length <= maxLength;
 
 const isPalindrome = (string: string) => {
 	const palindrome = string.toLowerCase().replaceAll(' ', '');
