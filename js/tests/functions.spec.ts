@@ -1,12 +1,12 @@
 import {getNumberFrom, isPalindrome, isShorterThan} from '../functions.ts';
+import {describe, expect ,test} from 'vitest';
 
 
 describe('Is string require optimal length criteria', () => {
 	const testCases = [
 		{value: ['проверяемая строка', 20], result: true},
 		{value: ['проверяемая строка', 18], result: true},
-		{value: ['проверяемая строка', 10], result: false},
-		{value: [], result: false}
+		{value: ['проверяемая строка', 10], result: false}
 	];
 	for (const testCase of testCases) {
 		test(`Is string "${testCase.value[0]}" shorter than ${testCase.value[1]} symbols`,

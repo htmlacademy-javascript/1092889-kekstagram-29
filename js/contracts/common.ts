@@ -1,11 +1,12 @@
 interface User {
 	name: string,
-	avatar: `img/avatar-${number}.svg`,
-	surname: string
+	avatar: `img/avatar-${number}.svg`
 }
-interface PhotoComment extends Omit<User, 'surname'>{
+interface PhotoComment {
 	id: number,
 	message: string,
+	name: User['name'],
+	avatar: User['avatar']
 }
 
 interface Photo {
