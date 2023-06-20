@@ -1,20 +1,19 @@
 import {getRandomArrayElement, getRandomInt} from './utils/randomizers.ts';
 import {User, PhotoComment, Photo} from './contracts/common.ts';
 import {messages, names, descriptions} from './data/template-values.json';
-enum Default {
-	MinId = 1,
-	MaxId = 25,
-	MinPhotoAddress = 1,
-	MaxPhotoAddress = 25,
-	MinLikes = 15,
-	MaxLikes = 200,
-	MinComments = 0,
-	MaxComments = 30,
-	MinAvatarId = 1,
-	MaxAvatarId = 6
-}
 
 export const getGeneratedMocks = (amount: number):Photo[] => {
+	enum Default {
+		MinId = 1,
+		MinPhotoAddress = 1,
+		MaxPhotoAddress = 25,
+		MinLikes = 15,
+		MaxLikes = 200,
+		MinComments = 0,
+		MaxComments = 30,
+		MinAvatarId = 1,
+		MaxAvatarId = 6
+	}
 	const getId = () => {
 		let id = Default.MinId;
 		return () => id++;
@@ -45,6 +44,6 @@ export const getGeneratedMocks = (amount: number):Photo[] => {
 	});
 	return Array.from({length: amount}, _getGeneratedPhoto);
 };
-
-getGeneratedMocks(Default.MaxId);
+const amount = 25;
+getGeneratedMocks(amount);
 
