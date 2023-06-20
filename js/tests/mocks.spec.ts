@@ -4,7 +4,7 @@ import {Photo, PhotoComment} from '../contracts/common.ts';
 
 describe('equality of unique ids', () => {
 	const amount = 25;
-	const getUniqueIds = (arr: Photo[] | PhotoComment[]): number => new Set(arr.flatMap((el) => el.id)).size;
+	const getUniqueIds = (arr: Pick<Photo, 'id'>[]): number => new Set(arr.map(({id}) => id)).size;
 	test('Photos unique ids should be equal', () => expect(getUniqueIds(getGeneratedMocks(amount))).toStrictEqual(amount)
 	);
 	const isUniqueLengthEqual = (arr: PhotoComment[]) => arr.length === getUniqueIds(arr);
