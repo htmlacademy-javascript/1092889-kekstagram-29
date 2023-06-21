@@ -1,5 +1,5 @@
 import {describe, expect ,test} from 'vitest';
-import {getGeneratedMocks} from '../main.ts';
+import {getGeneratedMocks} from '../mock-data/generators.ts';
 import {Photo, PhotoComment} from '../contracts/common.ts';
 
 describe('equality of unique ids', () => {
@@ -9,6 +9,6 @@ describe('equality of unique ids', () => {
 	);
 	const isUniqueLengthEqual = (arr: PhotoComment[]) => arr.length === getUniqueIds(arr);
 	test('Comments unique ids should be equal', () => {
-		expect(getGeneratedMocks(amount).flatMap((el) => el.comments)).toSatisfy(isUniqueLengthEqual);
+		expect(getGeneratedMocks(amount).map((el: Photo) => el.comments)).toSatisfy(isUniqueLengthEqual);
 	});
 });
