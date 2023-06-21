@@ -28,10 +28,9 @@ export const getGeneratedMocks = (amount: number):Photo[] => {
 	const _getGeneratedComment = ():PhotoComment => {
 		const user:User = _getGeneratedUser();
 		return {
-			avatar: user.avatar,
+			...user,
 			id: getCommentId(),
 			message: Array.from({length: getRandomInt(1, 2)}, () => getRandomArrayElement(messages)).join(' '),
-			name: user.name
 		};
 	};
 
