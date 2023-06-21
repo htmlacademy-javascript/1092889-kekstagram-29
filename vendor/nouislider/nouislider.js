@@ -937,7 +937,7 @@
           var origin = addNodeTo(base, options.cssClasses.origin);
           var handle = addNodeTo(origin, options.cssClasses.handle);
           addNodeTo(handle, options.cssClasses.touchArea);
-          handle.setAttribute("data-handle", String(handleNumber));
+          handle.setAttribute("mock-data-handle", String(handleNumber));
           if (options.keyboardSupport) {
               // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex
               // 0 = focusable and reachable
@@ -986,7 +986,7 @@
       }
       // Initialize a single slider.
       function addSlider(addTarget) {
-          // Apply classes and data to the target.
+          // Apply classes and mock-data to the target.
           addClass(addTarget, options.cssClasses.target);
           if (options.dir === 0) {
               addClass(addTarget, options.cssClasses.ltr);
@@ -1251,7 +1251,7 @@
               if (type > exports.PipsType.NoValue) {
                   node = addNodeTo(element, false);
                   node.className = getClasses(type, options.cssClasses.value);
-                  node.setAttribute("data-value", String(value));
+                  node.setAttribute("mock-data-value", String(value));
                   node.style[options.style] = offset + "%";
                   node.innerHTML = String(formatter.to(value));
               }
@@ -1324,7 +1324,7 @@
                   e.preventDefault();
               }
               e.calcPoint = e.points[options.ort];
-              // Call the event handler with the event [ and additional data ].
+              // Call the event handler with the event [ and additional mock-data ].
               callback(e, data);
               return;
           };
@@ -1441,7 +1441,7 @@
       // Handle movement on document for handle and range drag.
       function eventMove(event, data) {
           // Fix #498
-          // Check value of .buttons in 'start' to work around a bug in IE10 mobile (data.buttonsProperty).
+          // Check value of .buttons in 'start' to work around a bug in IE10 mobile (mock-data.buttonsProperty).
           // https://connect.microsoft.com/IE/feedback/details/927005/mobile-ie10-windows-phone-buttons-property-of-pointermove-event-always-zero
           // IE9 has .buttons and .which zero on mousemove.
           // Firefox breaks the spec MDN defines.
