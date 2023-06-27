@@ -1,4 +1,5 @@
-import {getGeneratedMocks} from './mocks/generators.ts';
+import {getGeneratedMocks} from './mocks/generators';
+
 
 
 const enum Default {
