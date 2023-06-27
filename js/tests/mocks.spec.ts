@@ -1,5 +1,5 @@
 import {describe, expect ,test} from 'vitest';
-import {getGeneratedMocks} from '../mock-data/generators.ts';
+import {getGeneratedMocks} from '../mocks/generators.ts';
 import {Photo, PhotoComment} from '../contracts/common.ts';
 
 describe('equality of unique ids', () => {
