@@ -1,4 +1,4 @@
-import {getNumberFrom, isPalindrome, isShorterThan} from '../functions.ts';
+import {getNumberFrom, isPalindrome, isShorterThan} from '../functions';
 import {describe, expect ,test} from 'vitest';
 
 
