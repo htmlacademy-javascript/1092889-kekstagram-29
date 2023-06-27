@@ -1,6 +1,6 @@
 
-import {Photo, PhotoComment, User} from '../contracts/common.ts';
-import {getRandomArrayElement, getRandomInt} from '../utils/randomizers.ts';
+import {Photo, PhotoComment, User} from '../contracts/common';
+import {getRandomArrayElement, getRandomInt} from '../utils/randomizers';
 import {names, descriptions, messages} from './template-values.json';
 export const enum Constants {
 	MIN_ID = 1,
