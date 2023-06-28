@@ -21,3 +21,4 @@ const getNumberFrom = (value: string | number) :number => {
 };
 
 export {isShorterThan, getNumberFrom, isPalindrome};
+

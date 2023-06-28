@@ -1,5 +1,4 @@
-import {getGeneratedMocks} from './mock-data/generators.ts';
-
+import {getGeneratedMocks} from './mocks/generators';
 
 const enum Default {
 	AMOUNT = 25

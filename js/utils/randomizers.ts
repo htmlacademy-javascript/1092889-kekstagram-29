@@ -1,4 +1,3 @@
-
 const getRandomInt = (min: number, max: number): number => {
 	const lower = Math.floor(max);
 	const upper = Math.ceil(min);
