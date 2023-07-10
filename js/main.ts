@@ -1,7 +1,8 @@
-import {getGeneratedMocks} from './mocks/generators';
 import {renderThumbnails} from './controllers/renderers/render-thumbnails';
-const enum Default {
-	AMOUNT = 25
-}
-const photos = getGeneratedMocks(Default.AMOUNT);
-renderThumbnails(photos);
+import {createThumbnailsListeners} from './controllers/event-handlers/thumbnails-handlers.ts';
+import {getPhotos} from './core/storage/photos.ts';
+
+
+renderThumbnails(getPhotos());
+createThumbnailsListeners();
+

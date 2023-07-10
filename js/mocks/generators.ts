@@ -1,6 +1,6 @@
 
 import {Photo, PhotoComment, User} from '../contracts/common';
-import {getRandomArrayElement, getRandomInt} from '../utils/randomizers';
+import {getRandomArrayElement, getRandomInt, getRandomUniqueInt} from '../utils/randomizers';
 import {names, descriptions, messages} from './template-values.json';
 export const enum Constants {
 	MIN_ID = 1,
@@ -19,8 +19,10 @@ const getId = () => {
 	return () => id++;
 };
 
+
 const getCommentId = getId();
 const getPhotoId = getId();
+
 
 const getGeneratedUser = ():User => ({
 	avatar: `img/avatar-${getRandomInt(Constants.MIN_AVATAR_ID,Constants.MAX_AVATAR_ID)}.svg`,
@@ -41,7 +43,7 @@ const getGeneratedPhoto = ():Photo => ({
 	description: Array.from({length: getRandomInt(1, 6)}, () => getRandomArrayElement(descriptions)).join(' ') ,
 	id: getPhotoId(),
 	likes: getRandomInt(Constants.MIN_LIKES, Constants.MAX_LIKES),
-	url: `photos/${getRandomInt(Constants.MIN_PHOTO_ADDRESS,Constants.MAX_PHOTO_ADDRESS)}.jpg`
+	url: `photos/${getRandomUniqueInt(Constants.MIN_PHOTO_ADDRESS,Constants.MAX_PHOTO_ADDRESS)}.jpg`
 });
 const getGeneratedMocks = (amount: number): Photo[] => Array.from({length: amount}, getGeneratedPhoto);
 
