@@ -1,7 +1,7 @@
 import {PhotoComment} from '../../contracts/common.ts';
 
 
-const template = document.querySelector<HTMLLIElement>('.social__comment');
+const template = document.querySelector<HTMLLIElement>('#social__comment');
 if (!template) {
 	throw new Error('Template for comments not found');
 }

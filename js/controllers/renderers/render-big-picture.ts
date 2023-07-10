@@ -23,6 +23,7 @@ const setBigPicture = ({url, likes, description}: Photo): HTMLElement=> {
 const unsetBigPicture = (): HTMLElement => {
 
 	bigPictureImg.src = '';
+	bigPictureImg.alt = '';
 	likesCount.textContent = '';
 	commentsCount.textContent = '';
 	pictureDescription.textContent = '';
