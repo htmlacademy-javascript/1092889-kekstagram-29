@@ -4,7 +4,7 @@ const bigPicture = document.querySelector<HTMLElement>('.big-picture');
 if (!bigPicture) {
 	throw new Error('Big picture not found');
 }
-const setBigPicture = ({url, likes, description, comments}: Photo): HTMLElement=> {
+const setBigPicture = ({url, likes, description}: Photo): HTMLElement=> {
 	const bigPictureImg = bigPicture.querySelector<HTMLImageElement>('.big-picture__img img')!;
 	const likesCount = bigPicture.querySelector<HTMLSpanElement>('.likes-count')!;
 	const commentsCount = bigPicture.querySelector<HTMLSpanElement>('.comments-count')!;
@@ -13,8 +13,6 @@ const setBigPicture = ({url, likes, description, comments}: Photo): HTMLElement=
 	bigPictureImg.src = url;
 	bigPictureImg.alt = description;
 	likesCount.textContent = likes.toString();
-	//commentsCount.textContent = comments.length.toString();
-
 	commentsCount.hidden = true;
 	pictureDescription.textContent = description;
 
