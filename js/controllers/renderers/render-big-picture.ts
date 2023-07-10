@@ -21,10 +21,6 @@ const setBigPicture = ({url, likes, description}: Photo): HTMLElement=> {
 };
 
 const unsetBigPicture = (): HTMLElement => {
-	const bigPictureImg = bigPicture.querySelector<HTMLImageElement>('.big-picture__img')!;
-	const likesCount = bigPicture.querySelector<HTMLSpanElement>('.likes-count')!;
-	const commentsCount = bigPicture.querySelector<HTMLSpanElement>('.comments-count')!;
-	const pictureDescription = bigPicture.querySelector<HTMLParagraphElement>('.social__caption')!;
 
 	bigPictureImg.src = '';
 	likesCount.textContent = '';
