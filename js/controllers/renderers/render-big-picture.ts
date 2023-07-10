@@ -11,8 +11,10 @@ const setBigPicture = ({url, likes, description, comments}: Photo): HTMLElement=
 	const pictureDescription = bigPicture.querySelector<HTMLParagraphElement>('.social__caption')!;
 
 	bigPictureImg.src = url;
+	bigPictureImg.alt = description;
 	likesCount.textContent = likes.toString();
 	//commentsCount.textContent = comments.length.toString();
+
 	commentsCount.hidden = true;
 	pictureDescription.textContent = description;
 

@@ -1,6 +1,7 @@
 import {Photo} from '../../contracts/common.ts';
 import {setBigPicture, unsetBigPicture} from '../renderers/render-big-picture.ts';
 import {addEscapeListener, isEscape, removeEscapeListener} from './global-handlers.ts';
+import {addCommentsListener, removeCommentsListener} from './comments-handlers.ts';
 
 
 const openBigPicture = (photo:Photo) => {
@@ -9,6 +10,7 @@ const openBigPicture = (photo:Photo) => {
 	bigPicture.classList.remove('hidden');
 	addEscapeListener(escapeBigPictureListener);
 	closeButton.addEventListener('click', closeBigPicture);
+	addCommentsListener();
 };
 
 const closeBigPicture = () => {
@@ -18,6 +20,7 @@ const closeBigPicture = () => {
 	removeEscapeListener(escapeBigPictureListener);
 	bigPicture.removeEventListener('click',closeBigPicture);
 	closeButton.removeEventListener('click', closeBigPicture);
+	removeCommentsListener();
 };
 
 
