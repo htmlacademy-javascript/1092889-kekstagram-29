@@ -1,5 +1,5 @@
 
-const isEscape = (key: string) => key === 'Escape';
+const isEscape = ({key}: KeyboardEvent) => key === 'Escape';
 
 const toggleModal = () => document.body.classList.toggle('modal-open');
 

@@ -1,14 +1,14 @@
 import {Photo} from '../../contracts/common.ts';
 import {setBigPicture, unsetBigPicture} from '../renderers/render-big-picture.ts';
 import {addEscapeListener, isEscape, removeEscapeListener} from './global-handlers.ts';
-import {addCommentsListener, removeCommentsListener} from './comments-handlers.ts';
+import {addComments, removeComments} from './comments-handlers.ts';
 
 
 const closeButton = document.querySelector<HTMLButtonElement>('.big-picture__cancel')!;
 closeButton.addEventListener('click', closeBigPicture);
 
-const escapeBigPictureListener = ({key}: KeyboardEvent) => {
-	if(isEscape(key)){
+const escapeBigPictureListener = (evt: KeyboardEvent) => {
+	if(isEscape(evt)){
 		closeBigPicture();
 	}
 };
@@ -17,7 +17,7 @@ function openBigPicture(photo:Photo) {
 	const bigPicture = setBigPicture(photo);
 	bigPicture.classList.remove('hidden');
 	addEscapeListener(escapeBigPictureListener);
-	addCommentsListener();
+	addComments(photo);
 }
 
 function closeBigPicture() {
@@ -25,7 +25,7 @@ function closeBigPicture() {
 	bigPicture.classList.add('hidden');
 	removeEscapeListener(escapeBigPictureListener);
 	bigPicture.removeEventListener('click',closeBigPicture);
-	removeCommentsListener();
+	removeComments();
 }
 
 export {

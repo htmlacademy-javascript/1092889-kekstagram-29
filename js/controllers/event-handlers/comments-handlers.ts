@@ -1,15 +1,37 @@
+import {Photo, PhotoComment} from '../../contracts/common.ts';
+import {getCommentsPack} from '../../core/storage/comments.ts';
+import {createComments} from '../renderers/render-comments.ts';
+import {changeVisibleCommentsCount} from '../renderers/render-big-picture.ts';
 
 const commentsContainer = document.querySelector<HTMLUListElement>('.social__comments')!;
 const loadCommentsButton = document.querySelector<HTMLButtonElement>('.social__comments-loader')!;
 
-//Заглушка
-const addCommentsListener = () => {
-	commentsContainer.hidden = true;
-	loadCommentsButton.hidden = true;
+const enum Default {
+	PACK_LENGTH= 5
+}
+
+let currentComments: Generator<Array<PhotoComment>>;
+const addComments = ({id}: Photo) => {
+	currentComments = getCommentsPack(id,Default.PACK_LENGTH) as Generator<Array<PhotoComment>>;
+	commentsContainer.innerHTML = '';
+	updateComments();
+	loadCommentsButton.addEventListener('click',updateComments);
 };
-//Заглушка
-const removeCommentsListener = ()=> {
-	commentsContainer.hidden = false;
+
+const removeComments = () => {
+	loadCommentsButton.removeEventListener('click',updateComments);
+	commentsContainer.innerHTML = '';
 	loadCommentsButton.hidden = false;
 };
-export {addCommentsListener, removeCommentsListener};
+
+function updateComments() {
+	const nextComments = currentComments.next();
+
+	if (nextComments.done) {
+		loadCommentsButton.hidden = true;
+	}
+	createComments(commentsContainer,...nextComments.value!);
+	changeVisibleCommentsCount(commentsContainer.children.length);
+}
+
+export {addComments, removeComments};
