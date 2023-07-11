@@ -3,12 +3,12 @@ import {setBigPicture, unsetBigPicture} from '../renderers/render-big-picture.ts
 import {addEscapeListener, isEscape, removeEscapeListener} from './global-handlers.ts';
 import {addComments, removeComments} from './comments-handlers.ts';
 
-
 const closeButton = document.querySelector<HTMLButtonElement>('.big-picture__cancel')!;
 closeButton.addEventListener('click', closeBigPicture);
 
 const escapeBigPictureListener = (evt: KeyboardEvent) => {
 	if(isEscape(evt)){
+
 		closeBigPicture();
 	}
 };
