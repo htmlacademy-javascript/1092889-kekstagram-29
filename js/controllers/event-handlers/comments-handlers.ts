@@ -7,7 +7,7 @@ const commentsContainer = document.querySelector<HTMLUListElement>('.social__com
 const loadCommentsButton = document.querySelector<HTMLButtonElement>('.social__comments-loader')!;
 
 const enum Default {
-	PACK_LENGTH= 5
+	PACK_LENGTH = 5
 }
 
 let currentComments: Generator<Array<PhotoComment>>;
