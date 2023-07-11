@@ -1,4 +1,4 @@
-import {Photo} from '../../contracts/common.ts';
+import {Photo} from '../../contracts/common';
 import {render} from '../../utils/render';
 
 const template = document.querySelector<HTMLTemplateElement>('#picture')?.content as DocumentFragment;

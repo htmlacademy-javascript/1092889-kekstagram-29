@@ -1,7 +1,10 @@
-import {PhotoComment} from '../../contracts/common.ts';
+import {PhotoComment} from '../../contracts/common';
+import {render} from '../../utils/render';
 
 
-const template = document.querySelector<HTMLLIElement>('#social__comment');
+const template = document.querySelector<HTMLTemplateElement>('#social__comment')!.content
+	.querySelector<HTMLLIElement>('.social__comment');
+
 if (!template) {
 	throw new Error('Template for comments not found');
 }
@@ -18,6 +21,11 @@ const createCommentNode = ({message, name, avatar}:PhotoComment): HTMLLIElement 
 	return comment;
 };
 
-export {createCommentNode};
+const createComments = (root: HTMLUListElement, ...elements:Array<PhotoComment>) => {
+	const commentNodes = elements.map(createCommentNode);
+	render(root, ...commentNodes);
+};
+
+export {createComments};
 
 

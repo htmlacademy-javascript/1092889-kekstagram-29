@@ -1,6 +1,6 @@
 import {renderThumbnails} from './controllers/renderers/render-thumbnails';
-import {createThumbnailsListeners} from './controllers/event-handlers/thumbnails-handlers.ts';
-import {getPhotos} from './core/storage/photos.ts';
+import {createThumbnailsListeners} from './controllers/event-handlers/thumbnails-handlers';
+import {getPhotos} from './core/storage/photos';
 
 
 renderThumbnails(getPhotos());
