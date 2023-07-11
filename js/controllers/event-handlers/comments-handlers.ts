@@ -1,7 +1,7 @@
-import {Photo, PhotoComment} from '../../contracts/common.ts';
-import {getCommentsPack} from '../../core/storage/comments.ts';
-import {createComments} from '../renderers/render-comments.ts';
-import {changeVisibleCommentsCount} from '../renderers/render-big-picture.ts';
+import {Photo, PhotoComment} from '../../contracts/common';
+import {getCommentsPack} from '../../core/storage/comments';
+import {createComments} from '../renderers/render-comments';
+import {changeVisibleCommentsCount} from '../renderers/render-big-picture';
 
 const commentsContainer = document.querySelector<HTMLUListElement>('.social__comments')!;
 const loadCommentsButton = document.querySelector<HTMLButtonElement>('.social__comments-loader')!;

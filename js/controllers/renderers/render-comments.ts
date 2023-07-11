@@ -1,5 +1,5 @@
-import {PhotoComment} from '../../contracts/common.ts';
-import {render} from '../../utils/render.ts';
+import {PhotoComment} from '../../contracts/common';
+import {render} from '../../utils/render';
 
 
 const template = document.querySelector<HTMLTemplateElement>('#social__comment')!.content

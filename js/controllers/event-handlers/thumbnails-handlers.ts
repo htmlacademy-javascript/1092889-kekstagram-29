@@ -1,8 +1,5 @@
-//import {openBigPicture} from './thumbnails-handlers.ts';
-
-
-import {getPhotoById} from '../../core/storage/photos.ts';
-import {openBigPicture} from './big-picture-handers.ts';
+import {getPhotoById} from '../../core/storage/photos';
+import {openBigPicture} from './big-picture-handers';
 
 const createThumbnailsListeners = () => {
 	const thumbnailsContainer = document.querySelector('.pictures')! as HTMLDivElement;

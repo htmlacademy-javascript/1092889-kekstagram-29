@@ -1,7 +1,7 @@
-import {Photo} from '../../contracts/common.ts';
-import {setBigPicture, unsetBigPicture} from '../renderers/render-big-picture.ts';
-import {addEscapeListener, isEscape, removeEscapeListener} from './global-handlers.ts';
-import {addComments, removeComments} from './comments-handlers.ts';
+import {Photo} from '../../contracts/common';
+import {setBigPicture, unsetBigPicture} from '../renderers/render-big-picture';
+import {addEscapeListener, isEscape, removeEscapeListener} from './global-handlers';
+import {addComments, removeComments} from './comments-handlers';
 
 const closeButton = document.querySelector<HTMLButtonElement>('.big-picture__cancel')!;
 closeButton.addEventListener('click', closeBigPicture);

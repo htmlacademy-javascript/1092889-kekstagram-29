@@ -1,4 +1,4 @@
-import {Photo} from '../../contracts/common.ts';
+import {Photo} from '../../contracts/common';
 
 const bigPicture = document.querySelector<HTMLElement>('.big-picture');
 const bigPictureImg = bigPicture?.querySelector<HTMLImageElement>('.big-picture__img img');

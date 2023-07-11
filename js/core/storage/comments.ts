@@ -1,5 +1,5 @@
-import {getCommmentsByPhotoId} from './photos.ts';
-import {PhotoComment} from '../../contracts/common.ts';
+import {getCommmentsByPhotoId} from './photos';
+import {PhotoComment} from '../../contracts/common';
 
 const packsFromArray = (arr: Array<PhotoComment>, packLength: number): Array<Array<PhotoComment>> => {
 	const res = [];
