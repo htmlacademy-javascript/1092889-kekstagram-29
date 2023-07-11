@@ -12,7 +12,7 @@ const packsFromArray = (arr: Array<PhotoComment>, packLength: number): Array<Arr
 };
 function* generateIterablePacks(arr: Array<PhotoComment>, packLength: number) {
 	const iterableArray = arr.slice();
-	const insufficientElements = iterableArray.length % 5 || 5;
+	const insufficientElements = iterableArray.length % packLength || packLength;
 	const lastElements = iterableArray.splice(-insufficientElements,insufficientElements);
 
 	yield* packsFromArray(iterableArray,packLength);
