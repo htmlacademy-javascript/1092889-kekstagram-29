@@ -1,5 +1,5 @@
 import {updateHashtagValidator} from './hashtag-validators.ts';
-import {updateDescriptionValidator} from './description-validator.ts';
+import {updateDescriptionValidator} from './description-validators.ts';
 
 
 type ValidationName = 'hashtag' | 'description'
