@@ -6,9 +6,9 @@ const createThumbnailsListeners = () => {
 
 
 	thumbnailsContainer.addEventListener('click',(evt) => {
-		evt.preventDefault();
 		const target = evt.target! as HTMLElement;
 		if (target.closest('.picture')){
+			evt.preventDefault();
 			const thumbnail = target.closest('.picture') as HTMLAnchorElement;
 			const photoId = new URL(thumbnail.href).pathname.split('/').pop();
 			const photo = getPhotoById(Number(photoId));
