@@ -3,7 +3,6 @@ import {createThumbnailsListeners} from './controllers/event-handlers/thumbnails
 import {getPhotos} from './core/storage/photos';
 import {createImageFormListeners} from './controllers/event-handlers/img-upload-form';
 
-
 renderThumbnails(getPhotos());
 createThumbnailsListeners();
 createImageFormListeners();
