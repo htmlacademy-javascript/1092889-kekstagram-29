@@ -1,4 +1,4 @@
-import {validators} from './validation-manager.ts';
+import {validators} from './validation-manager';
 
 enum Default {
 	MAX_LENGTH = 140
