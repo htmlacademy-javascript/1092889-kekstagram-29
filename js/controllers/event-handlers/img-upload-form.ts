@@ -99,9 +99,9 @@ function closeImageUploadForm(){
 	resetValidity();
 }
 
-const createImageFormListeners = () => {
+const addImageUploadInputListener = () => {
 	imageUploadInput.addEventListener('change',openImageUploadForm);
 };
 
 
-export {createImageFormListeners};
+export {addImageUploadInputListener};
