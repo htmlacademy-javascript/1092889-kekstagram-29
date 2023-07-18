@@ -8,21 +8,20 @@ closeButton.addEventListener('click', closeBigPicture);
 
 const escapeBigPictureListener = (evt: KeyboardEvent) => {
 	if(isEscape(evt)){
-
 		closeBigPicture();
 	}
 };
 
 function openBigPicture(photo:Photo) {
 	const bigPicture = setBigPicture(photo);
-	bigPicture.classList.remove('hidden');
+	bigPicture.classList.toggle('hidden');
 	addEscapeListener(escapeBigPictureListener);
 	addComments(photo);
 }
 
 function closeBigPicture() {
 	const bigPicture = unsetBigPicture();
-	bigPicture.classList.add('hidden');
+	bigPicture.classList.toggle('hidden');
 	removeEscapeListener(escapeBigPictureListener);
 	bigPicture.removeEventListener('click',closeBigPicture);
 	removeComments();
