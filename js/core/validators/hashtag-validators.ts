@@ -1,4 +1,4 @@
-import {validators} from './validation-manager';
+import {addValidator} from './validation-manager';
 
 const enum Default {
 	MAX_HASHTAG_COUNT = 5,
@@ -17,7 +17,7 @@ const enum HASHTAG_ERRORS {
 let hashtagsError = '';
 
 
-const HASHTAG_TEMPLATE = new RegExp(/(#[a-zа-яё0-9]{1,20})/);
+const HASHTAG_TEMPLATE = new RegExp(/^#[a-zа-яё0-9]{1,19}$/);
 
 const isStartsWithHashtag = (value: string) => value.startsWith('#');
 
@@ -34,7 +34,7 @@ const validateHashtags = (value: string) => {
 		return true;
 	}
 
-	const hashtags = value.trim().toLocaleLowerCase().split(' ');
+	const hashtags = value.trim().toLocaleLowerCase().split(/\s+/);
 
 	if(!isUniqueHashtags((hashtags))) {
 		hashtagsError = HASHTAG_ERRORS.NON_UNIQUE;
@@ -60,7 +60,6 @@ const validateHashtags = (value: string) => {
 			hashtagsError = HASHTAG_ERRORS.HASH_LENGTH;
 			return false;
 		}
-
 		if (!isValidHashtag(hashtag)) {
 			hashtagsError = HASHTAG_ERRORS.HASH_CHARACTERS;
 			return false;
@@ -71,7 +70,7 @@ const validateHashtags = (value: string) => {
 };
 
 const updateHashtagValidator = () => {
-	validators.set('hashtag',{validator: validateHashtags, error: () => hashtagsError});
+	addValidator('hashtag',{validator: validateHashtags, error: () => hashtagsError});
 };
 
 

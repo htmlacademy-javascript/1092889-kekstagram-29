@@ -1,4 +1,4 @@
-import {validators} from './validation-manager';
+import {addValidator} from './validation-manager';
 
 enum Default {
 	MAX_LENGTH = 140
@@ -23,6 +23,6 @@ const validateDescription = (value: string) => {
 	return true;
 };
 const updateDescriptionValidator = () => {
-	validators.set('description',{validator: validateDescription, error: () => descriptionError});
+	addValidator('description',{validator: validateDescription, error: () => descriptionError});
 };
 export {updateDescriptionValidator};

@@ -1,16 +1,15 @@
 const isEscape = ({key}: KeyboardEvent) => key === 'Escape';
 
-const toggleModal = () => document.body.classList.toggle('modal-open');
+const showModal = () => document.body.classList.add('modal-open');
+const hideModal = () => document.body.classList.remove('modal-open');
 
 const addEscapeListener = (listener: (evt: KeyboardEvent) => void) => {
-	toggleModal();
 	document.addEventListener('keydown',listener);
 };
 
 const removeEscapeListener = (listener: (evt: KeyboardEvent) => void) => {
-	toggleModal();
 	document.removeEventListener('keydown', listener);
 };
 
-export {isEscape, addEscapeListener, removeEscapeListener};
+export {isEscape, addEscapeListener, removeEscapeListener, showModal, hideModal};
 

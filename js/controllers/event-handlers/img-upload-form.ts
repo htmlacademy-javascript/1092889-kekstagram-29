@@ -1,4 +1,4 @@
-import {addEscapeListener, isEscape, removeEscapeListener} from './global-handlers';
+import {addEscapeListener, hideModal, isEscape, removeEscapeListener, showModal} from './global-handlers';
 import {setForm} from '../renderers/render-image-form';
 import Pristine from 'pristinejs';
 import {
@@ -14,6 +14,8 @@ import {
 	setEffectsControls,
 	setImageControls
 } from './img-change-handlers';
+import {addAlert} from './alerts-handlers.ts';
+import {sendData} from '../../core/api/api.ts';
 
 interface ImageUploadForm extends HTMLFormControlsCollection{
 	'upload-submit': HTMLButtonElement,
@@ -37,14 +39,6 @@ const scaleDown = form.querySelector<HTMLButtonElement>('.scale__control--smalle
 if(!form || !imageUploadOverlay || !imageUploadInput) {
 	throw new Error('Form not found');
 }
-
-const escapeImageUploadForm = (evt: KeyboardEvent) => {
-	const element = evt.target as HTMLElement;
-	if(isEscape(evt) && !element.closest('.img-upload__field-wrapper')){
-		closeImageUploadForm();
-	}
-};
-
 const initializeValidation = () => {
 	addValidationEngine(new Pristine(form, {
 		classTo: 'img-upload__field-wrapper',
@@ -52,16 +46,46 @@ const initializeValidation = () => {
 	createValidation(hashtags, 'hashtag');
 	createValidation(description, 'description');
 };
-const submitListener = (evt: Event) => {
-	evt.preventDefault();
+initializeValidation();
 
-	if (checkValidity()) {
+
+const escapeImageUploadForm = (evt: KeyboardEvent) => {
+	const element = evt.target as HTMLElement;
+	const isError = () => element.lastElementChild!.classList.contains('error');
+	if(isEscape(evt) && !element.closest('.img-upload__field-wrapper') && !isError()){
 		closeImageUploadForm();
 	}
 };
+const isSubmitting = (flag: boolean) => {
+	if (flag) {
+		submitButton.disabled = true;
+		submitButton.textContent = 'Отправляется...';
+	} else {
+		submitButton.textContent = 'Опубликовать';
+		submitButton.disabled = false;
+	}
+};
+const onFormSubmitSuccess = () => {
+	closeImageUploadForm();
+	addAlert('success');
+};
 
-const inputChangeListener = (evt: Event) => {
+const onFormSubmitFail = () => {
+	addAlert('error');
+	isSubmitting(false);
+};
+
+
+const submitListener = async (evt: Event) => {
 	evt.preventDefault();
+	if (checkValidity()) {
+		const formData = new FormData(form);
+		isSubmitting(true);
+		await sendData(onFormSubmitSuccess, onFormSubmitFail, formData);
+	}
+};
+
+const inputChangeListener = () => {
 	submitButton.disabled = !checkValidity();
 };
 
@@ -76,6 +100,7 @@ function openImageUploadForm() {
 	setForm(imageUrl, file.name);
 	imageUploadOverlay.classList.toggle('hidden');
 	addEscapeListener(escapeImageUploadForm);
+	showModal();
 	form.addEventListener('submit', submitListener);
 	form.addEventListener('input', inputChangeListener);
 	imageUploadCancel.addEventListener('click', closeImageUploadForm);
@@ -85,18 +110,18 @@ function openImageUploadForm() {
 	addScaleListeners();
 }
 
-initializeValidation();
-
 function closeImageUploadForm(){
 	form.reset();
 	imageUploadOverlay.classList.toggle('hidden');
 	removeEscapeListener(escapeImageUploadForm);
+	hideModal();
 	form.removeEventListener('submit', submitListener);
 	form.removeEventListener('input', inputChangeListener);
 	imageUploadCancel.removeEventListener('click', closeImageUploadForm);
 	removeScaleListeners();
 	removeEffectsListener();
 	resetValidity();
+	isSubmitting(false);
 }
 
 const addImageUploadInputListener = () => {
@@ -104,4 +129,4 @@ const addImageUploadInputListener = () => {
 };
 
 
-export {addImageUploadInputListener};
+export {addImageUploadInputListener,};
