@@ -1,6 +1,6 @@
 import {Photo} from '../../contracts/common';
 import {setBigPicture, unsetBigPicture} from '../renderers/render-big-picture';
-import {addEscapeListener, hideModal, isEscape, removeEscapeListener, showModal} from './global-handlers';
+import {addEscapeListener, removeModal, isEscape, removeEscapeListener, addModal} from './global-handlers';
 import {addComments, removeComments} from './comments-handlers';
 
 const closeButton = document.querySelector<HTMLButtonElement>('.big-picture__cancel')!;
@@ -16,7 +16,7 @@ function openBigPicture(photo:Photo) {
 	const bigPicture = setBigPicture(photo);
 	bigPicture.classList.toggle('hidden');
 	addEscapeListener(escapeBigPictureListener);
-	showModal();
+	addModal();
 	addComments(photo);
 }
 
@@ -24,7 +24,7 @@ function closeBigPicture() {
 	const bigPicture = unsetBigPicture();
 	bigPicture.classList.toggle('hidden');
 	removeEscapeListener(escapeBigPictureListener);
-	hideModal();
+	removeModal();
 	bigPicture.removeEventListener('click',closeBigPicture);
 	removeComments();
 }

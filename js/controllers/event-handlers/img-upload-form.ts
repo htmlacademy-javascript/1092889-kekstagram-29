@@ -1,4 +1,4 @@
-import {addEscapeListener, hideModal, isEscape, removeEscapeListener, showModal} from './global-handlers';
+import {addEscapeListener, removeModal, isEscape, removeEscapeListener, addModal} from './global-handlers';
 import {setForm} from '../renderers/render-image-form';
 import Pristine from 'pristinejs';
 import {
@@ -56,13 +56,13 @@ const escapeImageUploadForm = (evt: KeyboardEvent) => {
 		closeImageUploadForm();
 	}
 };
-const isSubmitting = (flag: boolean) => {
+const toggleSubmitButtonState = (flag: boolean) => {
 	if (flag) {
-		submitButton.disabled = true;
-		submitButton.textContent = 'Отправляется...';
-	} else {
 		submitButton.textContent = 'Опубликовать';
 		submitButton.disabled = false;
+	} else {
+		submitButton.disabled = true;
+		submitButton.textContent = 'Отправляется...';
 	}
 };
 const onFormSubmitSuccess = () => {
@@ -70,9 +70,10 @@ const onFormSubmitSuccess = () => {
 	addAlert('success');
 };
 
-const onFormSubmitFail = () => {
+const onFormSubmitFail = (err: Error) => {
 	addAlert('error');
-	isSubmitting(false);
+	addAlert('custom', err.message);
+	toggleSubmitButtonState(false);
 };
 
 
@@ -80,7 +81,7 @@ const submitListener = async (evt: Event) => {
 	evt.preventDefault();
 	if (checkValidity()) {
 		const formData = new FormData(form);
-		isSubmitting(true);
+		toggleSubmitButtonState(true);
 		await sendData(onFormSubmitSuccess, onFormSubmitFail, formData);
 	}
 };
@@ -89,18 +90,8 @@ const inputChangeListener = () => {
 	submitButton.disabled = !checkValidity();
 };
 
-
-function openImageUploadForm() {
-	if (imageUploadInput.files![0].type.split('/')[0] !== 'image') {
-		throw new Error('Is not an image');
-	}
-	const file = imageUploadInput.files![0];
-
-	const imageUrl = URL.createObjectURL(file);
-	setForm(imageUrl, file.name);
-	imageUploadOverlay.classList.toggle('hidden');
+const addImageUploadFormListeners = () => {
 	addEscapeListener(escapeImageUploadForm);
-	showModal();
 	form.addEventListener('submit', submitListener);
 	form.addEventListener('input', inputChangeListener);
 	imageUploadCancel.addEventListener('click', closeImageUploadForm);
@@ -108,21 +99,37 @@ function openImageUploadForm() {
 	setEffectsControls(effect, effectLevel);
 	addEffectsListener();
 	addScaleListeners();
-}
-
-function closeImageUploadForm(){
-	form.reset();
-	imageUploadOverlay.classList.toggle('hidden');
+};
+const removeImageUploadFormListeners = () => {
 	removeEscapeListener(escapeImageUploadForm);
-	hideModal();
 	form.removeEventListener('submit', submitListener);
 	form.removeEventListener('input', inputChangeListener);
 	imageUploadCancel.removeEventListener('click', closeImageUploadForm);
 	removeScaleListeners();
 	removeEffectsListener();
-	resetValidity();
-	isSubmitting(false);
+};
+
+function openImageUploadForm() {
+	if (imageUploadInput.files![0].type.split('/')[0] !== 'image') {
+		throw new Error('Is not an image');
+	}
+	const file = imageUploadInput.files![0];
+	const imageUrl = URL.createObjectURL(file);
+	setForm(imageUrl, file.name);
+	imageUploadOverlay.classList.toggle('hidden');
+	addImageUploadFormListeners();
+	addModal();
 }
+
+function closeImageUploadForm(){
+	form.reset();
+	imageUploadOverlay.classList.toggle('hidden');
+	removeImageUploadFormListeners();
+	removeModal();
+	resetValidity();
+	toggleSubmitButtonState(false);
+}
+
 
 const addImageUploadInputListener = () => {
 	imageUploadInput.addEventListener('change',openImageUploadForm);
