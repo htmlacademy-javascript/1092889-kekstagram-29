@@ -14,7 +14,6 @@ try{
 		addAlert('custom',err.message);
 	}
 }
-
-
 addImageUploadInputListener();
+
 
