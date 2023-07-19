@@ -130,7 +130,6 @@ function closeImageUploadForm(){
 	toggleSubmitButtonState(false);
 }
 
-
 const addImageUploadInputListener = () => {
 	imageUploadInput.addEventListener('change',openImageUploadForm);
 };
