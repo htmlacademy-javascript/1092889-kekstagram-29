@@ -1,5 +1,5 @@
 import {addEscapeListener, removeModal, isEscape, removeEscapeListener, addModal} from './global-handlers';
-import {setForm} from '../renderers/render-image-form';
+import {setForm, unsetForm} from '../renderers/render-image-form';
 import Pristine from 'pristinejs';
 import {
 	addValidationEngine,
@@ -25,6 +25,7 @@ interface ImageUploadForm extends HTMLFormControlsCollection{
 	scale: HTMLInputElement,
 	'effect-level': HTMLInputElement;
 }
+const IMAGE_EXTENSIONS = ['png', 'jpeg', 'jpg'];
 
 const form = document.querySelector<HTMLFormElement>('.img-upload__form')!;
 const imageUploadOverlay = form.querySelector<HTMLDivElement>('.img-upload__overlay')!;
@@ -51,7 +52,7 @@ initializeValidation();
 
 const escapeImageUploadForm = (evt: KeyboardEvent) => {
 	const element = evt.target as HTMLElement;
-	const isError = () => element.lastElementChild!.classList.contains('error');
+	const isError = () => document.body.lastElementChild!.classList.contains('error');
 	if(isEscape(evt) && !element.closest('.img-upload__field-wrapper') && !isError()){
 		closeImageUploadForm();
 	}
@@ -71,9 +72,9 @@ const onFormSubmitSuccess = () => {
 };
 
 const onFormSubmitFail = (err: Error) => {
-	addAlert('error');
 	addAlert('custom', err.message);
-	toggleSubmitButtonState(false);
+	addAlert('error');
+	toggleSubmitButtonState(true);
 };
 
 
@@ -81,7 +82,7 @@ const submitListener = async (evt: Event) => {
 	evt.preventDefault();
 	if (checkValidity()) {
 		const formData = new FormData(form);
-		toggleSubmitButtonState(true);
+		toggleSubmitButtonState(false);
 		await sendData(onFormSubmitSuccess, onFormSubmitFail, formData);
 	}
 };
@@ -110,8 +111,10 @@ const removeImageUploadFormListeners = () => {
 };
 
 function openImageUploadForm() {
-	if (imageUploadInput.files![0].type.split('/')[0] !== 'image') {
-		throw new Error('Is not an image');
+	if (!IMAGE_EXTENSIONS.some((el) => imageUploadInput.files![0].type.endsWith(el))) {
+		addAlert('custom', 'Выбранное изображение может быть форматов \'jpg\', \'jpeg\', \'png\'');
+		form.reset();
+		return;
 	}
 	const file = imageUploadInput.files![0];
 	const imageUrl = URL.createObjectURL(file);
@@ -122,12 +125,13 @@ function openImageUploadForm() {
 }
 
 function closeImageUploadForm(){
+	unsetForm();
 	form.reset();
 	imageUploadOverlay.classList.toggle('hidden');
 	removeImageUploadFormListeners();
 	removeModal();
 	resetValidity();
-	toggleSubmitButtonState(false);
+	toggleSubmitButtonState(true);
 }
 
 const addImageUploadInputListener = () => {
