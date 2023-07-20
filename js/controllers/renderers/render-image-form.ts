@@ -29,7 +29,7 @@ const updateImageScale = (imageScale: number) => {
 
 const updateImageFilter = (type: string, value: string) => {
 	imagePreview.style.filter = `${type}(${value})`;
-	effectValue.value = `${parseFloat(value)}`;
+	effectValue.value = `${parseFloat(value).toFixed(2)}`;
 };
 
 const resetImageFilter = () => {

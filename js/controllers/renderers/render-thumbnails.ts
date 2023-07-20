@@ -18,6 +18,7 @@ const createPictureNode = (photo: Photo): HTMLElement => {
 
 	thumbnail.href = `photos/${photo.id}`;
 	pictureImg.src = photo.url;
+	pictureImg.alt = photo.description;
 	pictureComments.textContent = photo.comments.length.toString();
 	pictureLikes.textContent = photo.likes.toString();
 

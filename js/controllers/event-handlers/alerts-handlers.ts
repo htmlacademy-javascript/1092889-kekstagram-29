@@ -1,6 +1,6 @@
 import {showAlert} from '../renderers/render-alert';
 import {Alert} from '../renderers/render-alert';
-import {addEscapeListener, removeModal, isEscape, removeEscapeListener, addModal} from './global-handlers';
+import {addEscapeListener, isEscape, removeEscapeListener} from './global-handlers';
 
 const enum Default {
 	ALERT_DURATION = 3000
@@ -9,7 +9,6 @@ const enum Default {
 let currentAlertElement: HTMLElement;
 let alertCloseButton: HTMLButtonElement;
 let alertInner: HTMLDivElement;
-let alertType: Alert;
 const escapeAlertListener = (evt: KeyboardEvent) => {
 	if(isEscape(evt)) {
 		removeAlert();
@@ -42,17 +41,12 @@ const addAlert = (type: Alert, message = '') => {
 		return;
 	}
 	currentAlertElement = (showAlert(type,message));
-	alertType = type;
 	alertCloseButton = currentAlertElement.querySelector<HTMLButtonElement>('button')!;
 	alertInner = currentAlertElement.querySelector<HTMLDivElement>('div')!;
 	addAlertListeners();
-	addModal();
 };
 function removeAlert () {
 	removeAlertListeners();
-	if(alertType !== 'error') {
-		removeModal();
-	}
 	currentAlertElement.remove();
 }
 

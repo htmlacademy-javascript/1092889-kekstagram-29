@@ -6,6 +6,7 @@ import {renderThumbnails} from './controllers/renderers/render-thumbnails';
 import {hidePictureFilters, showPictureFilters} from './controllers/event-handlers/picture-filters-handlers.ts';
 import {createThumbnailsListeners} from './controllers/event-handlers/thumbnails-handlers';
 
+addImageUploadInputListener();
 try{
 	await getData(updatePhotosState);
 	renderThumbnails(getPhotos());
@@ -17,7 +18,5 @@ try{
 		hidePictureFilters();
 	}
 }
-
-addImageUploadInputListener();
 
 
