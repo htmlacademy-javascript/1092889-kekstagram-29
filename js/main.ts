@@ -7,15 +7,12 @@ import {showContentFilters} from './controllers/event-handlers/content-filters-h
 import {createThumbnailsListeners} from './controllers/event-handlers/thumbnails-handlers';
 
 addImageUploadInputListener();
-try{
-	await getData(updatePhotosState);
-	renderThumbnails(getPhotos());
-	createThumbnailsListeners();
-	showContentFilters();
-} catch (err) {
-	if (err instanceof Error) {
-		addAlert('custom',err.message);
-	}
-}
-
-
+getData(updatePhotosState)
+	.then(() => renderThumbnails(getPhotos()))
+	.then(() => createThumbnailsListeners())
+	.then(() => showContentFilters())
+	.catch((err) => {
+		if (err instanceof Error) {
+			addAlert('custom',err.message);
+		}
+	});
