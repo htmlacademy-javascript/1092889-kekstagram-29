@@ -25,8 +25,4 @@ const showContentFilters = () => {
 	contentFiltersContainer.classList.remove('img-filters--inactive');
 };
 
-const hideContentFilters = () => {
-	contentFiltersContainer.classList.add('img-filters--inactive');
-};
-
-export {showContentFilters, hideContentFilters};
+export {showContentFilters};
