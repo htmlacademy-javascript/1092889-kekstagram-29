@@ -5,6 +5,11 @@ type FilterType ='default' | 'random' | 'discussed';
 
 type PhotoState = [() => Array<Photo>, (arg0: Array<Photo>) => void]
 
+const filtersByFilterType: Map<Omit<FilterType, 'default'>, (photos: Array<Photo>) => Array<Photo>> = new Map([
+	['random', filterByRandom],
+	['discussed', filterByDiscussed]
+]
+);
 
 const getPhotosState = (): PhotoState => {
 	let photosState:Photo[] = [];
@@ -17,11 +22,6 @@ const getPhotosState = (): PhotoState => {
 
 const [getPhotos, updatePhotosState] = getPhotosState();
 
-const filtersByFilterType: Map<Omit<FilterType, 'default'>, (photos: Array<Photo>) => Array<Photo>> = new Map([
-	['random', filterByRandom],
-	['discussed', filterByDiscussed]
-]
-);
 
 const throwPhotoError = (message: string) => {
 	throw new Error(message);

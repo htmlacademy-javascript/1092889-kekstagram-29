@@ -5,7 +5,7 @@ type Scale = {
 	step: number
 }
 type Units = '' | 'px' | '%'
-const EFFECTS_MAP: Map<Omit<Effects, 'none'>, string> = new Map([
+const effectsMap: Map<Omit<Effects, 'none'>, string> = new Map([
 	['chrome', 'grayscale'],
 	['sepia', 'sepia'],
 	['marvin', 'invert'],
@@ -13,7 +13,7 @@ const EFFECTS_MAP: Map<Omit<Effects, 'none'>, string> = new Map([
 	['heat', 'brightness']
 
 ]);
-const SCALE_MAP:Map<Omit<Effects, 'none'>, Scale> = new Map([
+const scaleMap:Map<Omit<Effects, 'none'>, Scale> = new Map([
 	['chrome',{min:0,max:1,step:0.1}],
 	['sepia',{min:0,max:1,step:0.1}],
 	['marvin',{min:0,max:100,step:1}],
@@ -21,7 +21,7 @@ const SCALE_MAP:Map<Omit<Effects, 'none'>, Scale> = new Map([
 	['heat',{min:0,max:3,step:0.1}]
 ]);
 
-const UNITS:Map<Omit<Effects, 'none'>, Units> = new Map([
+const units:Map<Omit<Effects, 'none'>, Units> = new Map([
 	['chrome',''],
 	['sepia',''],
 	['marvin','%'],
@@ -29,5 +29,5 @@ const UNITS:Map<Omit<Effects, 'none'>, Units> = new Map([
 	['heat','']
 ]);
 
-export {EFFECTS_MAP, SCALE_MAP, UNITS};
+export {effectsMap, scaleMap, units};
 export type {Effects, Scale, Units};

@@ -1,12 +1,4 @@
-const form = document.querySelector('.img-upload__form')!;
-const previewContainer = form.querySelector<HTMLDivElement>('.img-upload__preview')!;
-const imagePreview = previewContainer.querySelector('img')!;
-const effectsPreviews = form.querySelectorAll<HTMLSpanElement>('.effects__preview')!;
-const scaleValue = form.querySelector<HTMLInputElement>('.scale__control--value')!;
-const effectValue = form.querySelector<HTMLInputElement>('.effect-level__value')!;
-if (!form || !previewContainer) {
-	throw new Error('The markup has been broken, Cannot find Image Upload Form or it\'s parts');
-}
+import {effectsPreviews, effectValue, imagePreview, scaleValue} from '../elements/form-elements';
 
 const setForm = (imgSrc: string, alt: string) => {
 	imagePreview.src = imgSrc;

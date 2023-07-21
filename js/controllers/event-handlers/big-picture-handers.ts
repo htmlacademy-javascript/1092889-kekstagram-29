@@ -12,13 +12,13 @@ const escapeBigPictureListener = (evt: KeyboardEvent) => {
 	}
 };
 
-function openBigPicture(photo:Photo) {
+const openBigPicture = (photo:Photo) => {
 	const bigPicture = setBigPicture(photo);
 	bigPicture.classList.toggle('hidden');
 	addEscapeListener(escapeBigPictureListener);
 	addModal();
 	addComments(photo);
-}
+};
 
 function closeBigPicture() {
 	const bigPicture = unsetBigPicture();
