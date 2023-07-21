@@ -3,7 +3,7 @@ import {filterByDiscussed, filterByRandom} from '../content-sortings/filters';
 
 type FilterType ='default' | 'random' | 'discussed';
 
-type PhotoState = [() => Array<Photo>, (arg0: Array<Photo>) => void]
+type PhotoState = [() => Array<Photo>, (newState: Array<Photo>) => void]
 
 const filtersByFilterType: Map<Omit<FilterType, 'default'>, (photos: Array<Photo>) => Array<Photo>> = new Map([
 	['random', filterByRandom],

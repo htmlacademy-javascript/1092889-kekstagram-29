@@ -3,11 +3,11 @@ import {addValidator} from './validation-manager';
 enum Default {
 	MAX_LENGTH = 140
 }
-let descriptionError = '';
-enum DESCRIPTION_ERROR {
+enum DescriptionError {
 	DESCRIPTION_LENGTH = 'Длина комментария не может составлять больше 140 символов;'
 }
 
+let descriptionError = '';
 const isRequiredLength = (value: string) => value.length < Default.MAX_LENGTH;
 
 const validateDescription = (value: string) => {
@@ -16,7 +16,7 @@ const validateDescription = (value: string) => {
 	}
 
 	if (!isRequiredLength(value)) {
-		descriptionError = DESCRIPTION_ERROR.DESCRIPTION_LENGTH ;
+		descriptionError = DescriptionError.DESCRIPTION_LENGTH ;
 		return false;
 	}
 

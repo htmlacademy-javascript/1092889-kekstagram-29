@@ -51,12 +51,14 @@ const updateEffectsListener = (value: Array<string|number>) => {
 const changeEffectsListener = (evt: Event) => {
 	evt.preventDefault();
 	destroySlider();
+
 	if (effect.value === 'none') {
 		resetEffects();
 		return;
 	}
 	const effectValue = effect.value as Effects;
 	sliderContainer.hidden = false;
+
 	const {effectType, scaleData, units} = effectsMap.get(effectValue)!;
 	currentSlider = createSlider(scaleData);
 	updateImageFilter(effectType, `${scaleData.max}${units}`);

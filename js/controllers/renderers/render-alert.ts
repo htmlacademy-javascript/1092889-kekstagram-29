@@ -1,23 +1,15 @@
 import {render} from '../../utils/render';
+import {errorAlertTemplate, successAlertTemplate} from '../elements/template-elements';
 
 type Alert = 'success' | 'error' | 'custom';
 
 const alertContainer = document.body!;
 
-const successAlertTemplate = document.querySelector<HTMLTemplateElement>('#success')!.content!
-	.querySelector<HTMLElement>('.success')!;
-const errorAlertTemplate = document.querySelector<HTMLTemplateElement>('#error')!.content!
-	.querySelector<HTMLElement>('.error')!;
+const createSuccessAlertNode = () => successAlertTemplate.cloneNode(true) as HTMLElement;
 
-if (!successAlertTemplate || !errorAlertTemplate) {
-	throw new Error('Missing error templates');
-}
+const createErrorAlertNode = () => errorAlertTemplate.cloneNode(true) as HTMLElement;
 
-const createSuccessAlert = () => successAlertTemplate.cloneNode(true) as HTMLElement;
-
-const createErrorAlert = () => errorAlertTemplate.cloneNode(true) as HTMLElement;
-
-const createCustomAlert = (message: string) => {
+const createCustomAlertNode = (message: string) => {
 	const customAlert = document.createElement('div');
 	customAlert.classList.add('custom-alert');
 	customAlert.innerText = message;
@@ -28,22 +20,22 @@ const createCustomAlert = (message: string) => {
 const showAlert = (type: Alert, message = '') => {
 	switch (type) {
 		case 'success': {
-			const alert = createSuccessAlert();
+			const alert = createSuccessAlertNode();
 			render(alertContainer,alert);
 			return alert;
 		}
 		case 'error': {
-			const alert = createErrorAlert();
+			const alert = createErrorAlertNode();
 			render(alertContainer,alert);
 			return alert;
 		}
 		case 'custom': {
-			const alert = createCustomAlert(message);
+			const alert = createCustomAlertNode(message);
 			render(alertContainer,alert);
 			return alert;
 		}
 		default : {
-			const alert = createCustomAlert('Alert of Alert');
+			const alert = createCustomAlertNode('Alert of Alert');
 			render(alertContainer,alert);
 			return alert;
 		}

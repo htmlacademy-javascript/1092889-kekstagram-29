@@ -1,14 +1,14 @@
 import {getCommentsByPhotoId} from './photos';
 import {PhotoComment} from '../../contracts/common';
 
-const packsFromArray = (arr: Array<PhotoComment>, packLength: number): Array<Array<PhotoComment>> => {
-	const res = [];
+const packsFromArray = (photoComments: Array<PhotoComment>, packLength: number): Array<Array<PhotoComment>> => {
+	const packs = [];
 	let lastElementIndex = 0;
-	while(lastElementIndex < arr.length){
-		res.push(arr.slice(lastElementIndex, lastElementIndex + packLength));
+	while(lastElementIndex < photoComments.length){
+		packs.push(photoComments.slice(lastElementIndex, lastElementIndex + packLength));
 		lastElementIndex += packLength;
 	}
-	return res;
+	return packs;
 };
 function* generateIterablePacks(arr: Array<PhotoComment>, packLength: number) {
 	const iterableArray = arr.slice();
