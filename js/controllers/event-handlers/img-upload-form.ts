@@ -17,6 +17,7 @@ import {
 import {addAlert} from './alerts-handlers.ts';
 import {sendData} from '../../core/api/api.ts';
 
+
 interface ImageUploadForm extends HTMLFormControlsCollection{
 	'upload-submit': HTMLButtonElement,
 	description: HTMLTextAreaElement,
@@ -63,6 +64,7 @@ const isSubmitting = (flag: boolean) => {
 	} else {
 		submitButton.textContent = 'Опубликовать';
 		submitButton.disabled = false;
+
 	}
 };
 const onFormSubmitSuccess = () => {
