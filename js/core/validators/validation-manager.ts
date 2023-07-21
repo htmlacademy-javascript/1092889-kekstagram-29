@@ -1,5 +1,5 @@
-import {updateHashtagValidator} from './hashtag-validators.ts';
-import {updateDescriptionValidator} from './description-validators.ts';
+import {updateHashtagValidator} from './hashtag-validators';
+import {updateDescriptionValidator} from './description-validators';
 
 
 type ValidationName = 'hashtag' | 'description'
@@ -34,4 +34,10 @@ const resetValidity = () => {
 };
 
 
-export {validators, createValidation, checkValidity, resetValidity, addValidationEngine};
+export {
+	validators,
+	createValidation,
+	checkValidity,
+	resetValidity,
+	addValidationEngine
+};

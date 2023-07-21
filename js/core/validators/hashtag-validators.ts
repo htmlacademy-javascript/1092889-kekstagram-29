@@ -1,4 +1,4 @@
-import {validators} from './validation-manager.ts';
+import {validators} from './validation-manager';
 
 const enum Default {
 	MAX_HASHTAG_COUNT = 5,
