@@ -1,5 +1,5 @@
-import {Photo, PhotoComment} from '../../contracts/common.ts';
-import {filterByDiscussed, filterByRandom} from '../content-sortings/filters.ts';
+import {Photo, PhotoComment} from '../../contracts/common';
+import {filterByDiscussed, filterByRandom} from '../content-sortings/filters';
 
 type FilterType ='default' | 'random' | 'discussed';
 

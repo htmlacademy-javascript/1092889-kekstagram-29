@@ -4,8 +4,8 @@ import {
 	updateImageFilter,
 	updateImageScale
 } from '../../renderers/render-image-form';
-import {scaleDown, scaleUp} from '../../../core/img-transformers/img-scaler';
-import {Effects, effectsMap, Scale, scaleMap, units} from '../../../core/img-transformers/img-filters';
+import {scaleDown, scaleUp} from '../../../core/img-transformers/scalers';
+import {effectsMap, ScaleData, Effects} from '../../../core/img-transformers/filters';
 import {API} from 'nouislider';
 import * as noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
@@ -20,7 +20,7 @@ import {
 
 let currentSlider: API;
 
-const createSlider = ({min,max,step}: Scale):API => noUiSlider.create(sliderWrapper,{
+const createSlider = ({min,max,step}: ScaleData):API => noUiSlider.create(sliderWrapper,{
 	start: max,
 	range: {
 		'min':min,
@@ -44,7 +44,8 @@ const resetEffects = () => {
 
 const updateEffectsListener = (value: Array<string|number>) => {
 	const effectValue = effect.value;
-	updateImageFilter(effectsMap.get(effectValue)!, `${value}${units.get(effectValue)}`);
+	const {effectType, units} = effectsMap.get(effectValue)!;
+	updateImageFilter(effectType, `${value}${units}`);
 };
 
 const changeEffectsListener = (evt: Event) => {
@@ -56,8 +57,9 @@ const changeEffectsListener = (evt: Event) => {
 	}
 	const effectValue = effect.value as Effects;
 	sliderContainer.hidden = false;
-	currentSlider = createSlider(scaleMap.get(effectValue)!);
-	updateImageFilter(effectsMap.get(effectValue)!, `${scaleMap.get(effectValue)!.max}${units.get(effectValue)}`);
+	const {effectType, scaleData, units} = effectsMap.get(effectValue)!;
+	currentSlider = createSlider(scaleData);
+	updateImageFilter(effectType, `${scaleData.max}${units}`);
 	currentSlider.on('update', updateEffectsListener);
 };
 

@@ -6,18 +6,18 @@ const enum Default {
 
 const scaleUp = (value: number) => {
 	value += Default.ADD_VALUE;
-	if (value > Default.MAX_VALUE) {
-		return 1;
+	if (value >= Default.MAX_VALUE) {
+		return Default.MAX_VALUE;
 	}
-	return value / 100;
+	return value;
 };
 
 const scaleDown = (value: number) => {
 	value -= Default.ADD_VALUE;
-	if (value < Default.MIN_VALUE) {
-		return 0.25;
+	if (value <= Default.MIN_VALUE) {
+		return Default.MIN_VALUE;
 	}
-	return value / 100;
+	return value;
 };
 
 export {scaleUp, scaleDown};

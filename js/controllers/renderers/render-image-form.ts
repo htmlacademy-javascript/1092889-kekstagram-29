@@ -15,8 +15,8 @@ const unsetForm = () => {
 };
 
 const updateImageScale = (imageScale: number) => {
-	imagePreview.style.transform = `scale(${imageScale.toString()})`;
-	scaleValue.value = `${imageScale * 100}%`;
+	scaleValue.value = `${imageScale}%`;
+	imagePreview.style.transform = `scale(${(imageScale / 100).toString()})`;
 };
 
 const updateImageFilter = (type: string, value: string) => {

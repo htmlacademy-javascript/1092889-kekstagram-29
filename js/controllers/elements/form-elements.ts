@@ -10,18 +10,18 @@ interface ImageUploadForm extends HTMLFormControlsCollection{
 const form = document.querySelector<HTMLFormElement>('.img-upload__form')!;
 const imageUploadOverlay = form.querySelector<HTMLDivElement>('.img-upload__overlay')!;
 const imageUploadInput = form.querySelector<HTMLInputElement>('.img-upload__input')!;
-const submitButton = form.elements.namedItem('upload-submit') as HTMLButtonElement;
-const {effect,scale,description,hashtags} = form.elements as ImageUploadForm;
 const scaleUpButton = form.querySelector<HTMLButtonElement>('.scale__control--bigger')!;
 const scaleDownButton = form.querySelector<HTMLButtonElement>('.scale__control--smaller')!;
-const sliderContainer = form.querySelector('.img-upload__effect-level')! as HTMLFieldSetElement;
-const sliderWrapper = form.querySelector('.effect-level__slider') as HTMLDivElement;
-const effectsWrapper = form.querySelector('.effects') as HTMLFieldSetElement;
+const sliderContainer = form.querySelector<HTMLFieldSetElement>('.img-upload__effect-level')!;
+const sliderWrapper = form.querySelector<HTMLDivElement>('.effect-level__slider')!;
+const effectsWrapper = form.querySelector<HTMLFieldSetElement>('.effects')!;
 const previewContainer = form.querySelector<HTMLDivElement>('.img-upload__preview')!;
-const imagePreview = previewContainer.querySelector('img')!;
+const imagePreview = previewContainer.querySelector<HTMLImageElement>('img')!;
 const effectsPreviews = form.querySelectorAll<HTMLSpanElement>('.effects__preview')!;
 const scaleValue = form.querySelector<HTMLInputElement>('.scale__control--value')!;
 const effectValue = form.querySelector<HTMLInputElement>('.effect-level__value')!;
+const submitButton = form.elements.namedItem('upload-submit') as HTMLButtonElement;
+const {effect,scale,description,hashtags} = form.elements as ImageUploadForm;
 
 
 if(!form || !imageUploadOverlay || !imageUploadInput || !previewContainer) {
