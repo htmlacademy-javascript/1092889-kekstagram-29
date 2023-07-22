@@ -6,7 +6,7 @@ const enum Default {
 	ALERT_DURATION = 3000
 }
 
-let currentAlertElement: HTMLElement;
+let currentAlertNode: HTMLElement;
 let alertCloseButton: HTMLButtonElement;
 let alertInner: HTMLDivElement;
 const escapeAlertListener = (evt: KeyboardEvent) => {
@@ -15,7 +15,7 @@ const escapeAlertListener = (evt: KeyboardEvent) => {
 	}
 };
 
-const addOverlayListener = (evt: Event) => {
+const overlayClickListener = (evt: Event) => {
 	evt.stopPropagation();
 	const targetElement = evt.target as HTMLElement;
 	if(targetElement.closest('div') !== alertInner) {
@@ -23,13 +23,13 @@ const addOverlayListener = (evt: Event) => {
 	}
 };
 const addAlertListeners = () => {
+	currentAlertNode.addEventListener('click', overlayClickListener);
 	alertCloseButton!.addEventListener('click', removeAlert);
-	currentAlertElement.addEventListener('click', addOverlayListener);
 	addEscapeListener(escapeAlertListener);
 };
 const removeAlertListeners = () => {
+	currentAlertNode.removeEventListener('click', overlayClickListener);
 	alertCloseButton!.removeEventListener('click', removeAlert);
-	currentAlertElement.removeEventListener('click', addOverlayListener);
 	removeEscapeListener(escapeAlertListener);
 };
 
@@ -40,14 +40,14 @@ const addAlert = (type: Alert, message = '') => {
 		setTimeout(() => alert.remove(), Default.ALERT_DURATION);
 		return;
 	}
-	currentAlertElement = (showAlert(type,message));
-	alertCloseButton = currentAlertElement.querySelector<HTMLButtonElement>('button')!;
-	alertInner = currentAlertElement.querySelector<HTMLDivElement>('div')!;
+	currentAlertNode = (showAlert(type,message));
+	alertCloseButton = currentAlertNode.querySelector<HTMLButtonElement>('button')!;
+	alertInner = currentAlertNode.querySelector<HTMLDivElement>('div')!;
 	addAlertListeners();
 };
 function removeAlert () {
 	removeAlertListeners();
-	currentAlertElement.remove();
+	currentAlertNode.remove();
 }
 
 

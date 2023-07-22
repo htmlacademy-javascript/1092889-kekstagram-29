@@ -22,7 +22,7 @@ const thumbnailsClickListener = (evt: Event) => {
 	}
 };
 
-const createThumbnailsListeners = () => {
+const addThumbnailsListeners = () => {
 	thumbnailsContainer.addEventListener('click',thumbnailsClickListener);
 };
 
@@ -37,10 +37,10 @@ const rerenderThumbnails = (photos: Array<Photo>) => {
 		removeThumbnailsListeners();
 	}
 	renderThumbnails(...photos);
-	createThumbnailsListeners();
+	addThumbnailsListeners();
 };
 
 const debouncedRerenderThumbnails = debounce<Photo>(rerenderThumbnails, Default.DEBOUNCE_TIME);
 
 
-export {debouncedRerenderThumbnails, createThumbnailsListeners};
+export {debouncedRerenderThumbnails, addThumbnailsListeners};

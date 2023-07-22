@@ -40,12 +40,12 @@ const toggleSubmitButtonState = (flag: boolean) => {
 		submitButton.textContent = 'Отправляется...';
 	}
 };
-const onFormSubmitSuccess = () => {
+const formSubmitSuccessHandler = () => {
 	form.reset();
 	addAlert('success');
 };
 
-const onFormSubmitFail = (err: Error) => {
+const formSubmitFailHandler = (err: Error) => {
 	addAlert('custom', err.message);
 	addAlert('error');
 	toggleSubmitButtonState(true);
@@ -57,7 +57,7 @@ const submitListener = async (evt: Event) => {
 	if (checkValidity()) {
 		const formData = new FormData(form);
 		toggleSubmitButtonState(false);
-		await sendData(onFormSubmitSuccess, onFormSubmitFail, formData);
+		await sendData(formSubmitSuccessHandler, formSubmitFailHandler, formData);
 	}
 };
 

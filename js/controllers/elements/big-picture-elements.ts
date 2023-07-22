@@ -7,6 +7,7 @@ const commentsVisibleCount = bigPicture.querySelector<HTMLSpanElement>('.social_
 const closeButton = bigPicture.querySelector<HTMLButtonElement>('.big-picture__cancel')!;
 const commentsContainer = bigPicture.querySelector<HTMLUListElement>('.social__comments')!;
 const loadCommentsButton = bigPicture.querySelector<HTMLButtonElement>('.social__comments-loader')!;
+
 if (!bigPicture) {
 	throw new Error('Big picture not found');
 }

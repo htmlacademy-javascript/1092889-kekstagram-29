@@ -1,5 +1,3 @@
-import {Photo} from '../../contracts/common';
-
 const enum Method {
 	GET = 'GET',
 	POST = 'POST'
@@ -18,7 +16,7 @@ const enum FetchError {
 	POST_ERROR = 'Данные не загруженны на сервер'
 }
 
-const load = (route: Route, errorText: FetchError, method = Method.GET, body: FormData | null = null) =>
+const load = (route: Route, errorText: FetchError, method = Method.GET, body?: BodyInit) =>
 	fetch(`${Address.BASE_URL}${route}`, {
 		method: method,
 		body: body
@@ -34,10 +32,10 @@ const load = (route: Route, errorText: FetchError, method = Method.GET, body: Fo
 		});
 
 
-const getData = async (onSuccess: (response: Array<Photo>) => void) => {
+const getData = async (cb: CallableFunction) => {
 	try {
-		const res = await load(Route.REQUEST_URL, FetchError.GET_ERROR);
-		onSuccess(res);
+		const result = await load(Route.REQUEST_URL, FetchError.GET_ERROR);
+		cb(result);
 	} catch (err) {
 		if (err instanceof Error) {
 			throw new Error(err.message);
@@ -45,10 +43,10 @@ const getData = async (onSuccess: (response: Array<Photo>) => void) => {
 	}
 };
 
-const sendData = async (onSuccess: (response: Response) => void, onError: (error: Error) => void, formData: FormData) => {
+const sendData = async (onSuccess: CallableFunction, onError: (error: Error) => void, data: BodyInit) => {
 	try {
-		const res = await load(Route.RESPONSE_URL, FetchError.POST_ERROR, Method.POST, formData);
-		onSuccess(res);
+		await load(Route.RESPONSE_URL, FetchError.POST_ERROR, Method.POST, data);
+		onSuccess();
 	} catch (err) {
 		if (err instanceof Error) {
 			onError(err);
