@@ -1,9 +1,9 @@
 import {showAlert} from '../renderers/render-alert';
 import {Alert} from '../renderers/render-alert';
-import {addEscapeListener, hideModal, isEscape, removeEscapeListener, showModal} from './global-handlers.ts';
+import {addEscapeListener, removeModal, isEscape, removeEscapeListener, addModal} from './global-handlers';
 
 const enum Default {
-	ALERT_TIME = 3000
+	ALERT_DURATION = 3000
 }
 
 let currentAlertElement: HTMLElement;
@@ -36,21 +36,22 @@ const removeAlertListeners = () => {
 
 
 const addAlert = (type: Alert, message = '') => {
-	currentAlertElement = (showAlert(type,message));
 	if(type === 'custom') {
-		setTimeout(() => currentAlertElement.remove(), Default.ALERT_TIME);
+		const alert = (showAlert(type,message));
+		setTimeout(() => alert.remove(), Default.ALERT_DURATION);
 		return;
 	}
+	currentAlertElement = (showAlert(type,message));
 	alertType = type;
 	alertCloseButton = currentAlertElement.querySelector<HTMLButtonElement>('button')!;
 	alertInner = currentAlertElement.querySelector<HTMLDivElement>('div')!;
 	addAlertListeners();
-	showModal();
+	addModal();
 };
 function removeAlert () {
 	removeAlertListeners();
 	if(alertType !== 'error') {
-		hideModal();
+		removeModal();
 	}
 	currentAlertElement.remove();
 }

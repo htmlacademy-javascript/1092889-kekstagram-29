@@ -1,4 +1,4 @@
-import {render} from '../../utils/render.ts';
+import {render} from '../../utils/render';
 
 type Alert = 'success' | 'error' | 'custom';
 

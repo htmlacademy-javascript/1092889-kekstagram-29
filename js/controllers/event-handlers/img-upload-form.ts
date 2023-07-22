@@ -1,4 +1,4 @@
-import {addEscapeListener, hideModal, isEscape, removeEscapeListener, showModal} from './global-handlers';
+import {addEscapeListener, removeModal, isEscape, removeEscapeListener, addModal} from './global-handlers';
 import {setForm} from '../renderers/render-image-form';
 import Pristine from 'pristinejs';
 import {
@@ -16,7 +16,6 @@ import {
 } from './img-change-handlers';
 import {addAlert} from './alerts-handlers.ts';
 import {sendData} from '../../core/api/api.ts';
-
 
 interface ImageUploadForm extends HTMLFormControlsCollection{
 	'upload-submit': HTMLButtonElement,
@@ -57,14 +56,13 @@ const escapeImageUploadForm = (evt: KeyboardEvent) => {
 		closeImageUploadForm();
 	}
 };
-const isSubmitting = (flag: boolean) => {
+const toggleSubmitButtonState = (flag: boolean) => {
 	if (flag) {
-		submitButton.disabled = true;
-		submitButton.textContent = 'Отправляется...';
-	} else {
 		submitButton.textContent = 'Опубликовать';
 		submitButton.disabled = false;
-
+	} else {
+		submitButton.disabled = true;
+		submitButton.textContent = 'Отправляется...';
 	}
 };
 const onFormSubmitSuccess = () => {
@@ -72,9 +70,10 @@ const onFormSubmitSuccess = () => {
 	addAlert('success');
 };
 
-const onFormSubmitFail = () => {
+const onFormSubmitFail = (err: Error) => {
 	addAlert('error');
-	isSubmitting(false);
+	addAlert('custom', err.message);
+	toggleSubmitButtonState(false);
 };
 
 
@@ -82,13 +81,33 @@ const submitListener = async (evt: Event) => {
 	evt.preventDefault();
 	if (checkValidity()) {
 		const formData = new FormData(form);
-		isSubmitting(true);
+		toggleSubmitButtonState(true);
 		await sendData(onFormSubmitSuccess, onFormSubmitFail, formData);
 	}
 };
 
 const inputChangeListener = () => {
 	submitButton.disabled = !checkValidity();
+};
+
+const addImageUploadFormListeners = () => {
+	addEscapeListener(escapeImageUploadForm);
+	form.addEventListener('submit', submitListener);
+	form.addEventListener('input', inputChangeListener);
+	imageUploadCancel.addEventListener('click', closeImageUploadForm);
+	setImageControls(scale, scaleUp, scaleDown);
+	setEffectsControls(effect, effectLevel);
+	addEffectsListener();
+	addScaleListeners();
+};
+
+const removeImageUploadFormListeners = () => {
+	removeEscapeListener(escapeImageUploadForm);
+	form.removeEventListener('submit', submitListener);
+	form.removeEventListener('input', inputChangeListener);
+	imageUploadCancel.removeEventListener('click', closeImageUploadForm);
+	removeScaleListeners();
+	removeEffectsListener();
 };
 
 
@@ -101,29 +120,17 @@ function openImageUploadForm() {
 	const imageUrl = URL.createObjectURL(file);
 	setForm(imageUrl, file.name);
 	imageUploadOverlay.classList.toggle('hidden');
-	addEscapeListener(escapeImageUploadForm);
-	showModal();
-	form.addEventListener('submit', submitListener);
-	form.addEventListener('input', inputChangeListener);
-	imageUploadCancel.addEventListener('click', closeImageUploadForm);
-	setImageControls(scale, scaleUp, scaleDown);
-	setEffectsControls(effect, effectLevel);
-	addEffectsListener();
-	addScaleListeners();
+	addImageUploadFormListeners();
+	addModal();
 }
 
 function closeImageUploadForm(){
 	form.reset();
 	imageUploadOverlay.classList.toggle('hidden');
-	removeEscapeListener(escapeImageUploadForm);
-	hideModal();
-	form.removeEventListener('submit', submitListener);
-	form.removeEventListener('input', inputChangeListener);
-	imageUploadCancel.removeEventListener('click', closeImageUploadForm);
-	removeScaleListeners();
-	removeEffectsListener();
+	removeImageUploadFormListeners();
+	removeModal();
 	resetValidity();
-	isSubmitting(false);
+	toggleSubmitButtonState(false);
 }
 
 const addImageUploadInputListener = () => {

@@ -1,6 +1,7 @@
 import {Photo} from '../../contracts/common';
 import {render} from '../../utils/render';
 
+
 const template = document.querySelector<HTMLTemplateElement>('#picture')?.content as DocumentFragment;
 const picturesContainer = document?.querySelector('.pictures') as HTMLDivElement;
 if (!template || !picturesContainer) {
@@ -26,6 +27,7 @@ const renderThumbnails = (photos: Array<Photo>): void => {
 	const thumbnails = photos.map(createPictureNode);
 	render(picturesContainer, ...thumbnails);
 };
+
 
 export {renderThumbnails};
 

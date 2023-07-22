@@ -1,4 +1,3 @@
-import {Alert} from '../../controllers/renderers/render-alert';
 import {Photo} from '../../contracts/common';
 
 const enum Method {
@@ -35,24 +34,24 @@ const load = (route: Route, errorText: FetchError, method = Method.GET, body: Fo
 		});
 
 
-const getData = async (onSuccess: (response: Array<Photo>) => void, onError: (type: Alert, message: string) => void) => {
+const getData = async (onSuccess: (response: Array<Photo>) => void) => {
 	try {
 		const res = await load(Route.REQUEST_URL, FetchError.GET_ERROR);
 		onSuccess(res);
 	} catch (err) {
 		if (err instanceof Error) {
-			onError('custom',err.message);
+			throw new Error(err.message);
 		}
 	}
 };
 
-const sendData = async (onSuccess: (response: Response) => void, onError: (type: Alert, message: string) => void, formData: FormData) => {
+const sendData = async (onSuccess: (response: Response) => void, onError: (error: Error) => void, formData: FormData) => {
 	try {
 		const res = await load(Route.RESPONSE_URL, FetchError.POST_ERROR, Method.POST, formData);
 		onSuccess(res);
 	} catch (err) {
 		if (err instanceof Error) {
-			onError('custom',err.message);
+			onError(err);
 		}
 	}
 };

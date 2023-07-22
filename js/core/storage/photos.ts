@@ -1,6 +1,10 @@
 import {Photo, PhotoComment} from '../../contracts/common.ts';
+import {filterByDiscussed, filterByRandom} from '../content-sortings/filters.ts';
+
+type FilterType ='default' | 'random' | 'discussed';
 
 type PhotoState = [() => Array<Photo>, (arg0: Array<Photo>) => void]
+
 
 const getPhotosState = (): PhotoState => {
 	let photosState:Photo[] = [];
@@ -13,12 +17,26 @@ const getPhotosState = (): PhotoState => {
 
 const [getPhotos, updatePhotosState] = getPhotosState();
 
+const filtersByFilterType: Map<Omit<FilterType, 'default'>, (photos: Array<Photo>) => Array<Photo>> = new Map([
+	['random', filterByRandom],
+	['discussed', filterByDiscussed]
+]
+);
+
 const throwPhotoError = (message: string) => {
 	throw new Error(message);
+};
+const getFilteredPhotos = (filterType:FilterType = 'default') => {
+	const photos = getPhotos();
+	if (filterType === 'default') {
+		return getPhotos();
+	}
+	return filtersByFilterType.get(filterType)!(photos);
 };
 
 const getPhotoById = (id: number): Photo => getPhotos().find((photo) => photo.id === id) ?? throwPhotoError(`There is no requested photoId = ${id} in storage`);
 
 const getCommentsByPhotoId = (id: number): Array<PhotoComment> => getPhotoById(id).comments ?? throwPhotoError(`There is no comments for requested photoId =  ${id}`);
 
-export {getPhotos, getPhotoById, getCommentsByPhotoId, updatePhotosState};
+export {getPhotos, getPhotoById, getCommentsByPhotoId, updatePhotosState, getFilteredPhotos};
+export type {FilterType};

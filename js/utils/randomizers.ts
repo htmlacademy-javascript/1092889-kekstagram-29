@@ -18,10 +18,20 @@ const randomUniqueIntConstructor = () => {
 		}
 	};
 };
+
+const getRandomUniqueArray = <Element>(arr: Array<Element>): Array<Element> => {
+	const uniqueElements: Set<Element> = new Set();
+	const arrayUniqueLength = new Set(arr).size;
+	while(uniqueElements.size !== arrayUniqueLength) {
+		uniqueElements.add(getRandomArrayElement(arr));
+	}
+	return Array.from(uniqueElements);
+};
 const getRandomUniqueInt = randomUniqueIntConstructor();
 
 export {
 	getRandomInt,
 	getRandomArrayElement,
-	getRandomUniqueInt
+	getRandomUniqueInt,
+	getRandomUniqueArray
 };
