@@ -1,12 +1,7 @@
 import {Photo} from '../../contracts/common';
 import {render} from '../../utils/render';
 import {thumbnailTemplate} from '../elements/template-elements';
-
-const thumbnailsContainer = document.querySelector('.pictures')! as HTMLDivElement;
-if (!thumbnailsContainer) {
-	throw new Error('Thumbnails container not found');
-}
-
+import {thumbnailsContainer} from '../elements/thumbnails-elements';
 const createThumbnailNode = (photo: Photo): HTMLElement => {
 
 	const thumbnail = thumbnailTemplate.cloneNode(true) as HTMLAnchorElement;

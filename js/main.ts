@@ -3,8 +3,8 @@ import {addImageUploadInputListener} from './controllers/event-handlers/image-up
 import {getData} from './core/api/api';
 import {addAlert} from './controllers/event-handlers/alerts-handlers';
 import {renderThumbnails} from './controllers/renderers/render-thumbnails';
-import {showContentFilters} from './controllers/event-handlers/content-filters-handlers';
-import {addThumbnailsListeners} from './controllers/event-handlers/thumbnails-handlers';
+import {showContentFilters} from './controllers/event-handlers/thumbnails/thumbnails-filters-handlers';
+import {addThumbnailsListeners} from './controllers/event-handlers/thumbnails/thumbnails-handlers';
 
 addImageUploadInputListener();
 getData(updatePhotosState)

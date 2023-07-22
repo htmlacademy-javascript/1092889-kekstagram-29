@@ -1,15 +1,13 @@
-import {getPhotoById} from '../../core/storage/photos';
-import {openBigPicture} from './big-picture/big-picture-handers';
-import {debounce} from '../../utils/debounce';
-import {Photo} from '../../contracts/common';
-import {renderThumbnails} from '../renderers/render-thumbnails';
+import {getPhotoById} from '../../../core/storage/photos';
+import {openBigPicture} from '../big-picture/big-picture-handers';
+import {debounce} from '../../../utils/debounce';
+import {Photo} from '../../../contracts/common';
+import {renderThumbnails} from '../../renderers/render-thumbnails';
+import {thumbnailsContainer} from '../../elements/thumbnails-elements';
 
 const enum Default {
 	DEBOUNCE_TIME = 500
 }
-
-const thumbnailsContainer = document.querySelector('.pictures')! as HTMLDivElement;
-
 
 const thumbnailsClickListener = (evt: Event) => {
 	const target = evt.target! as HTMLElement;
