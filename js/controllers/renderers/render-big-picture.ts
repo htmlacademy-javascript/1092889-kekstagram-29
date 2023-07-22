@@ -1,10 +1,14 @@
 import {Photo} from '../../contracts/common';
 import {
-	bigPictureImg,
+	bigPictureImg, commentsContainer,
 	commentsCount, commentsVisibleCount,
 	likesCount,
 	pictureDescription
 } from '../elements/big-picture-elements';
+
+const clearCommentsSection = () => {
+	commentsContainer.innerHTML = '';
+};
 
 const setBigPicture = ({url, likes, description, comments}: Photo)=> {
 
@@ -13,6 +17,7 @@ const setBigPicture = ({url, likes, description, comments}: Photo)=> {
 	likesCount.textContent = likes.toString();
 	commentsCount.textContent = comments.length.toString();
 	pictureDescription.textContent = description;
+	clearCommentsSection();
 };
 
 const unsetBigPicture = () => {
@@ -22,11 +27,12 @@ const unsetBigPicture = () => {
 	commentsCount.textContent = '';
 	likesCount.textContent = '';
 	pictureDescription.textContent = '';
+	clearCommentsSection();
 };
 
-const changeVisibleCommentsCount = (amount: number) => {
+const updateVisibleCommentsCount = (amount: number) => {
 	commentsVisibleCount.childNodes[0].textContent = `${amount} из `;
 };
 
 
-export {setBigPicture, unsetBigPicture, changeVisibleCommentsCount};
+export {setBigPicture, unsetBigPicture, updateVisibleCommentsCount};

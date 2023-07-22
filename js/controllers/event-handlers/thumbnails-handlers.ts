@@ -1,5 +1,5 @@
 import {getPhotoById} from '../../core/storage/photos';
-import {openBigPicture} from './big-picture-handers';
+import {openBigPicture} from './big-picture/big-picture-handers';
 import {debounce} from '../../utils/debounce';
 import {Photo} from '../../contracts/common';
 import {renderThumbnails} from '../renderers/render-thumbnails';
@@ -36,7 +36,7 @@ const rerenderThumbnails = (photos: Array<Photo>) => {
 		pictures.forEach((el) => el.remove());
 		removeThumbnailsListeners();
 	}
-	renderThumbnails(photos);
+	renderThumbnails(...photos);
 	createThumbnailsListeners();
 };
 

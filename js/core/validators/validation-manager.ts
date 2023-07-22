@@ -4,7 +4,7 @@ import {updateDescriptionValidator} from './description-validators';
 
 type ValidationName = 'hashtag' | 'description'
 
-interface ValidationEngineRoot {
+interface ValidationEngine {
 	validate:() => boolean,
 	reset: () => void,
 	addValidator: (arg0: HTMLElement, arg1: (value: string)=> boolean, arg3: () => string) => void
@@ -16,7 +16,7 @@ interface ValidatorObject {
 }
 
 const validators: Map<ValidationName, ValidatorObject> = new Map();
-let validationEngine: ValidationEngineRoot;
+let validationEngine: ValidationEngine;
 
 const addValidator = (name: ValidationName, validatorObj: ValidatorObject) => {
 	validators.set(name, validatorObj);
@@ -27,7 +27,7 @@ const updateValidators = () => {
 	updateDescriptionValidator();
 };
 
-const addValidationEngine = (validationEngineRoot: ValidationEngineRoot) => {
+const addValidationEngine = (validationEngineRoot: ValidationEngine) => {
 	validationEngine = validationEngineRoot;
 };
 const createValidation = (root: HTMLElement ,validationName: ValidationName) => {

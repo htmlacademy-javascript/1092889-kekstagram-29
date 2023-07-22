@@ -15,7 +15,7 @@ const escapeAlertListener = (evt: KeyboardEvent) => {
 	}
 };
 
-const addOutsideListener = (evt: Event) => {
+const addOverlayListener = (evt: Event) => {
 	evt.stopPropagation();
 	const targetElement = evt.target as HTMLElement;
 	if(targetElement.closest('div') !== alertInner) {
@@ -24,12 +24,12 @@ const addOutsideListener = (evt: Event) => {
 };
 const addAlertListeners = () => {
 	alertCloseButton!.addEventListener('click', removeAlert);
-	currentAlertElement.addEventListener('click', addOutsideListener);
+	currentAlertElement.addEventListener('click', addOverlayListener);
 	addEscapeListener(escapeAlertListener);
 };
 const removeAlertListeners = () => {
 	alertCloseButton!.removeEventListener('click', removeAlert);
-	currentAlertElement.removeEventListener('click', addOutsideListener);
+	currentAlertElement.removeEventListener('click', addOverlayListener);
 	removeEscapeListener(escapeAlertListener);
 };
 

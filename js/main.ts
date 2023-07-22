@@ -1,5 +1,5 @@
 import {getPhotos, updatePhotosState} from './core/storage/photos';
-import {addImageUploadInputListener} from './controllers/event-handlers/image-upload-form/img-upload-form';
+import {addImageUploadInputListener} from './controllers/event-handlers/image-upload-form/img-upload-form-handlers';
 import {getData} from './core/api/api';
 import {addAlert} from './controllers/event-handlers/alerts-handlers';
 import {renderThumbnails} from './controllers/renderers/render-thumbnails';
@@ -8,7 +8,7 @@ import {createThumbnailsListeners} from './controllers/event-handlers/thumbnails
 
 addImageUploadInputListener();
 getData(updatePhotosState)
-	.then(() => renderThumbnails(getPhotos()))
+	.then(() => renderThumbnails(...getPhotos()))
 	.then(() => createThumbnailsListeners())
 	.then(() => showContentFilters())
 	.catch((err) => {

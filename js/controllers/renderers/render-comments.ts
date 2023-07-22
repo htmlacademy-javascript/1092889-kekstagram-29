@@ -1,6 +1,7 @@
 import {PhotoComment} from '../../contracts/common';
 import {render} from '../../utils/render';
 import {commentTemplate} from '../elements/template-elements';
+import {commentsContainer} from '../elements/big-picture-elements';
 
 const createCommentNode = ({message, name, avatar}:PhotoComment): HTMLLIElement => {
 	const comment = commentTemplate.cloneNode(true) as HTMLLIElement;
@@ -14,11 +15,11 @@ const createCommentNode = ({message, name, avatar}:PhotoComment): HTMLLIElement 
 	return comment;
 };
 
-const createComments = (root: HTMLUListElement, ...elements:Array<PhotoComment>) => {
-	const commentNodes = elements.map(createCommentNode);
-	render(root, ...commentNodes);
+const renderComments = (...comments:Array<PhotoComment>) => {
+	const commentNodes = comments.map(createCommentNode);
+	render(commentsContainer, ...commentNodes);
 };
 
-export {createComments};
+export {renderComments};
 
 

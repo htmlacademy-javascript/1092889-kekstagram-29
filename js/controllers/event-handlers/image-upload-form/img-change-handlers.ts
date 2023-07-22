@@ -5,7 +5,7 @@ import {
 	updateImageScale
 } from '../../renderers/render-image-form';
 import {scaleDown, scaleUp} from '../../../core/img-transformers/scalers';
-import {effectsMap, ScaleData, Effects} from '../../../core/img-transformers/filters';
+import {effectsMap, ScaleData, Effects} from '../../../core/img-transformers/effects';
 import {API} from 'nouislider';
 import * as noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
@@ -37,23 +37,23 @@ const destroySlider = () => {
 		currentSlider.destroy();
 	}
 };
-const resetEffects = () => {
+const resetEffect = () => {
 	resetImageFilter();
 	sliderContainer.hidden = true;
 };
 
-const updateEffectsListener = (value: Array<string|number>) => {
+const updateEffectListener = (value: Array<string|number>) => {
 	const effectValue = effect.value;
 	const {effectType, units} = effectsMap.get(effectValue)!;
 	updateImageFilter(effectType, `${value}${units}`);
 };
 
-const changeEffectsListener = (evt: Event) => {
+const changeEffectListener = (evt: Event) => {
 	evt.preventDefault();
 	destroySlider();
 
 	if (effect.value === 'none') {
-		resetEffects();
+		resetEffect();
 		return;
 	}
 	const effectValue = effect.value as Effects;
@@ -62,12 +62,12 @@ const changeEffectsListener = (evt: Event) => {
 	const {effectType, scaleData, units} = effectsMap.get(effectValue)!;
 	currentSlider = createSlider(scaleData);
 	updateImageFilter(effectType, `${scaleData.max}${units}`);
-	currentSlider.on('update', updateEffectsListener);
+	currentSlider.on('update', updateEffectListener);
 };
 
-const removeEffects = () => {
+const removeEffect = () => {
 	destroySlider();
-	resetEffects();
+	resetEffect();
 };
 
 const increaseScale = (evt: Event) => {
@@ -85,14 +85,14 @@ const addScaleListeners = () => {
 	scaleDownButton.addEventListener('click', decreaseScale);
 };
 
-const addEffectsListener = () => {
-	effectsWrapper.addEventListener('change', changeEffectsListener);
+const addEffectListener = () => {
+	effectsWrapper.addEventListener('change', changeEffectListener);
 };
 
 
 export {
 	addScaleListeners,
-	addEffectsListener,
-	removeEffects,
+	addEffectListener,
+	removeEffect,
 	resetImagePreview
 };

@@ -6,7 +6,7 @@ import {
 	imageUploadOverlay,
 	submitButton
 } from '../../elements/form-elements';
-import {addEscapeListener, removeModal, isEscape, removeEscapeListener, addModal} from '../global-handlers';
+import {addEscapeListener, removeModalState, isEscape, removeEscapeListener, addModalState} from '../global-handlers';
 import {resetImagePreview, setForm, unsetForm} from '../../renderers/render-image-form';
 import Pristine from 'pristinejs';
 import {
@@ -16,8 +16,8 @@ import {
 	resetValidity,
 } from '../../../core/validators/validation-manager';
 import {
-	addEffectsListener,
-	addScaleListeners, removeEffects,
+	addEffectListener,
+	addScaleListeners, removeEffect,
 } from './img-change-handlers';
 import {addAlert} from '../alerts-handlers';
 import {sendData} from '../../../core/api/api';
@@ -75,7 +75,7 @@ form.addEventListener('reset', closeImageUploadForm);
 form.addEventListener('submit', submitListener);
 form.addEventListener('input', inputChangeListener);
 
-addEffectsListener();
+addEffectListener();
 addScaleListeners();
 
 const addImageUploadFormListeners = () => {
@@ -84,7 +84,7 @@ const addImageUploadFormListeners = () => {
 const removeImageUploadFormListeners = () => {
 	removeEscapeListener(escapeImageUploadForm);
 	resetImagePreview();
-	removeEffects();
+	removeEffect();
 };
 
 
@@ -99,14 +99,14 @@ const openImageUploadForm = () => {
 	setForm(imageUrl, file.name);
 	imageUploadOverlay.classList.toggle('hidden');
 	addImageUploadFormListeners();
-	addModal();
+	addModalState();
 };
 
 function closeImageUploadForm(){
 	unsetForm();
 	imageUploadOverlay.classList.toggle('hidden');
 	removeImageUploadFormListeners();
-	removeModal();
+	removeModalState();
 	resetValidity();
 	toggleSubmitButtonState(true);
 }

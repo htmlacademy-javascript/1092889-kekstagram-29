@@ -15,7 +15,7 @@ const changeContentFilterListener = (evt: Event) => {
 		target.classList.add('img-filters__button--active');
 
 		const filterType = target.id.split('-').pop() as FilterType;
-		debouncedRerenderThumbnails(getFilteredPhotos(filterType));
+		debouncedRerenderThumbnails(...getFilteredPhotos(filterType));
 	}
 };
 

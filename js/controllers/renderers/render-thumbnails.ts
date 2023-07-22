@@ -2,30 +2,30 @@ import {Photo} from '../../contracts/common';
 import {render} from '../../utils/render';
 import {thumbnailTemplate} from '../elements/template-elements';
 
-const picturesContainer = document?.querySelector('.pictures') as HTMLDivElement;
-if (!picturesContainer) {
-	throw new Error('Container');
+const thumbnailsContainer = document.querySelector('.pictures')! as HTMLDivElement;
+if (!thumbnailsContainer) {
+	throw new Error('Thumbnails container not found');
 }
 
 const createThumbnailNode = (photo: Photo): HTMLElement => {
 
 	const thumbnail = thumbnailTemplate.cloneNode(true) as HTMLAnchorElement;
-	const pictureImg = thumbnail.querySelector('.picture__img') as HTMLImageElement;
-	const pictureInfo = thumbnail.querySelector('.picture__info') as HTMLParagraphElement;
-	const pictureComments = pictureInfo.querySelector('.picture__comments') as HTMLSpanElement;
-	const pictureLikes = pictureInfo.querySelector('.picture__likes') as HTMLSpanElement;
+	const thumbnailImg = thumbnail.querySelector('.picture__img') as HTMLImageElement;
+	const thumbnailInfo = thumbnail.querySelector('.picture__info') as HTMLParagraphElement;
+	const thumbnailComments = thumbnailInfo.querySelector('.picture__comments') as HTMLSpanElement;
+	const thumbnailLikes = thumbnailInfo.querySelector('.picture__likes') as HTMLSpanElement;
 
 	thumbnail.href = `photos/${photo.id}`;
-	pictureImg.src = photo.url;
-	pictureImg.alt = photo.description;
-	pictureComments.textContent = photo.comments.length.toString();
-	pictureLikes.textContent = photo.likes.toString();
+	thumbnailImg.src = photo.url;
+	thumbnailImg.alt = photo.description;
+	thumbnailComments.textContent = photo.comments.length.toString();
+	thumbnailLikes.textContent = photo.likes.toString();
 
 	return thumbnail;
 };
-const renderThumbnails = (photos: Array<Photo>): void => {
+const renderThumbnails = (...photos: Array<Photo>): void => {
 	const thumbnails = photos.map(createThumbnailNode);
-	render(picturesContainer, ...thumbnails);
+	render(thumbnailsContainer, ...thumbnails);
 };
 
 

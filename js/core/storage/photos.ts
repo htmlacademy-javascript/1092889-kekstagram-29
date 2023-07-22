@@ -1,5 +1,5 @@
 import {Photo, PhotoComment} from '../../contracts/common';
-import {filterByDiscussed, filterByRandom} from '../content-sortings/filters';
+import {filterByDiscussed, filterByRandom} from '../content-filters/filters';
 
 type FilterType ='default' | 'random' | 'discussed';
 
@@ -22,10 +22,6 @@ const getPhotosState = (): PhotoState => {
 
 const [getPhotos, updatePhotosState] = getPhotosState();
 
-
-const throwPhotoError = (message: string) => {
-	throw new Error(message);
-};
 const getFilteredPhotos = (filterType:FilterType = 'default') => {
 	const photos = getPhotos();
 	if (filterType === 'default') {
@@ -34,9 +30,9 @@ const getFilteredPhotos = (filterType:FilterType = 'default') => {
 	return filtersByFilterType.get(filterType)!(photos);
 };
 
-const getPhotoById = (id: number): Photo => getPhotos().find((photo) => photo.id === id) ?? throwPhotoError(`There is no requested photoId = ${id} in storage`);
+const getPhotoById = (id: number): Photo => getPhotos().find((photo) => photo.id === id)!;
 
-const getCommentsByPhotoId = (id: number): Array<PhotoComment> => getPhotoById(id).comments ?? throwPhotoError(`There is no comments for requested photoId =  ${id}`);
+const getCommentsByPhotoId = (id: number): Array<PhotoComment> => getPhotoById(id).comments!;
 
 export {getPhotos, getPhotoById, getCommentsByPhotoId, updatePhotosState, getFilteredPhotos};
 export type {FilterType};
