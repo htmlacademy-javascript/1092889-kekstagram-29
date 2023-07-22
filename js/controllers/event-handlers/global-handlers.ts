@@ -12,4 +12,3 @@ const removeEscapeListener = (listener: (evt: KeyboardEvent) => void) => {
 };
 
 export {isEscape, addEscapeListener, removeEscapeListener, addModal, removeModal};
-

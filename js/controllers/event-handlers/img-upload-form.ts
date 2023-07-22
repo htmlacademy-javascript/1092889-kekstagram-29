@@ -100,6 +100,7 @@ const addImageUploadFormListeners = () => {
 	addEffectsListener();
 	addScaleListeners();
 };
+
 const removeImageUploadFormListeners = () => {
 	removeEscapeListener(escapeImageUploadForm);
 	form.removeEventListener('submit', submitListener);
@@ -109,11 +110,13 @@ const removeImageUploadFormListeners = () => {
 	removeEffectsListener();
 };
 
+
 function openImageUploadForm() {
 	if (imageUploadInput.files![0].type.split('/')[0] !== 'image') {
 		throw new Error('Is not an image');
 	}
 	const file = imageUploadInput.files![0];
+
 	const imageUrl = URL.createObjectURL(file);
 	setForm(imageUrl, file.name);
 	imageUploadOverlay.classList.toggle('hidden');
