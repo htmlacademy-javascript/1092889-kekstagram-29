@@ -78,16 +78,6 @@ form.addEventListener('input', inputChangeListener);
 addEffectListener();
 addScaleListeners();
 
-const addImageUploadFormListeners = () => {
-	addEscapeListener(escapeImageUploadForm);
-};
-const removeImageUploadFormListeners = () => {
-	removeEscapeListener(escapeImageUploadForm);
-	resetImagePreview();
-	removeEffect();
-};
-
-
 const openImageUploadForm = () => {
 	if (!IMAGE_EXTENSIONS.some((el) => imageUploadInput.files![0].type.endsWith(el))) {
 		addAlert('custom', 'Выбранное изображение может быть форматов \'jpg\', \'jpeg\', \'png\'');
@@ -98,16 +88,18 @@ const openImageUploadForm = () => {
 	const imageUrl = URL.createObjectURL(file);
 	setForm(imageUrl, file.name);
 	imageUploadOverlay.classList.toggle('hidden');
-	addImageUploadFormListeners();
+	addEscapeListener(escapeImageUploadForm);
 	addModalState();
 };
 
 function closeImageUploadForm(){
 	unsetForm();
 	imageUploadOverlay.classList.toggle('hidden');
-	removeImageUploadFormListeners();
+	removeEscapeListener(escapeImageUploadForm);
 	removeModalState();
 	resetValidity();
+	resetImagePreview();
+	removeEffect();
 	toggleSubmitButtonState(true);
 }
 
