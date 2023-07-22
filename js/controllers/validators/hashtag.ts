@@ -1,5 +1,3 @@
-import {addValidator} from './validation-manager';
-
 const enum Default {
 	MAX_HASHTAG_COUNT = 5,
 	MAX_HASHTAG_LENGTH = 20
@@ -16,6 +14,7 @@ const enum HashtagError {
 
 let hashtagError = '';
 
+const getHashtagError = () => hashtagError;
 
 const HASHTAG_TEMPLATE = new RegExp(/^#[a-zа-яё0-9]{1,19}$/);
 
@@ -69,9 +68,5 @@ const validateHashtags = (value: string) => {
 	});
 };
 
-const updateHashtagValidator = () => {
-	addValidator('hashtag',{validator: validateHashtags, error: () => hashtagError});
-};
 
-
-export {updateHashtagValidator};
+export {validateHashtags, getHashtagError};

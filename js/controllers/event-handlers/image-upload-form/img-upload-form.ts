@@ -1,20 +1,15 @@
 import {
 	form,
-	description,
-	hashtags,
 	imageUploadInput,
 	imageUploadOverlay,
 	submitButton
 } from '../../elements/img-upload-form';
 import {addEscapeListener, removeModalState, isEscape, removeEscapeListener, addModalState} from '../global';
 import {resetImagePreview, setForm, unsetForm} from '../../renderers/img-upload-form';
-import Pristine from 'pristinejs';
 import {
-	addValidationEngine,
 	checkValidity,
-	createValidation,
 	resetValidity,
-} from '../../../core/validators/validation-manager';
+} from '../../validators/img-upload-form.ts';
 import {
 	addEffectListener,
 	addScaleListeners, removeEffect,
@@ -64,12 +59,6 @@ const submitListener = async (evt: Event) => {
 const inputChangeListener = () => {
 	submitButton.disabled = !checkValidity();
 };
-
-addValidationEngine(new Pristine(form, {
-	classTo: 'img-upload__field-wrapper',
-	errorTextParent: 'img-upload__field-wrapper'}));
-createValidation(hashtags, 'hashtag');
-createValidation(description, 'description');
 
 form.addEventListener('reset', closeImageUploadForm);
 form.addEventListener('submit', submitListener);
