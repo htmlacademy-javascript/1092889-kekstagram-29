@@ -1,4 +1,4 @@
-import {getCommmentsByPhotoId} from './photos';
+import {getCommentsByPhotoId} from './photos';
 import {PhotoComment} from '../../contracts/common';
 
 const packsFromArray = (arr: Array<PhotoComment>, packLength: number): Array<Array<PhotoComment>> => {
@@ -20,7 +20,7 @@ function* generateIterablePacks(arr: Array<PhotoComment>, packLength: number) {
 }
 
 const getCommentsPack = (id: number, packLength: number): Generator<Array<PhotoComment>> | Generator<PhotoComment> => {
-	const comments = getCommmentsByPhotoId(id);
+	const comments = getCommentsByPhotoId(id);
 	return generateIterablePacks(comments, packLength);
 };
 

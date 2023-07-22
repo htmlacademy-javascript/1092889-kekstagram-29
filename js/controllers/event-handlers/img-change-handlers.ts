@@ -45,6 +45,8 @@ const setEffectsControls = (effectsRootNode: RadioNodeList, sliderInput: HTMLInp
 	effects = effectsRootNode;
 	sliderRoot = sliderInput.nextElementSibling as HTMLDivElement;
 	sliderContainer = sliderRoot.parentElement! as HTMLFieldSetElement;
+	sliderContainer.hidden = true;
+
 	const effectNode = effects[0] as HTMLInputElement;
 	eventRoot = effectNode.closest('fieldset')!;
 };
