@@ -1,8 +1,8 @@
 import {Photo, PhotoComment} from '../../../contracts/common';
 import {getCommentsPack} from '../../../core/storage/comments';
-import {renderComments} from '../../renderers/render-comments';
-import {updateVisibleCommentsCount} from '../../renderers/render-big-picture';
-import {commentsContainer, loadCommentsButton} from '../../elements/big-picture-elements';
+import {renderComments} from '../../renderers/comments';
+import {updateVisibleCommentsCount} from '../../renderers/big-picture';
+import {commentsContainer, loadCommentsButton} from '../../elements/big-picture';
 
 
 const enum Default {

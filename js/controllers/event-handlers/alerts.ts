@@ -1,6 +1,6 @@
-import {showAlert} from '../renderers/render-alert';
-import {Alert} from '../renderers/render-alert';
-import {addEscapeListener, isEscape, removeEscapeListener} from './global-handlers';
+import {showAlert} from '../renderers/alert';
+import {Alert} from '../renderers/alert';
+import {addEscapeListener, isEscape, removeEscapeListener} from './global';
 
 const enum Default {
 	ALERT_DURATION = 3000

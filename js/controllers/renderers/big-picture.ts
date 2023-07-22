@@ -4,7 +4,7 @@ import {
 	commentsCount, commentsVisibleCount,
 	likesCount,
 	pictureDescription
-} from '../elements/big-picture-elements';
+} from '../elements/big-picture';
 
 const clearCommentsSection = () => {
 	commentsContainer.innerHTML = '';

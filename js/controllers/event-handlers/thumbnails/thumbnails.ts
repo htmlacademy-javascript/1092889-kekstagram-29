@@ -1,9 +1,9 @@
 import {getPhotoById} from '../../../core/storage/photos';
-import {openBigPicture} from '../big-picture/big-picture-handers';
+import {openBigPicture} from '../big-picture/big-picture';
 import {debounce} from '../../../utils/debounce';
 import {Photo} from '../../../contracts/common';
-import {renderThumbnails} from '../../renderers/render-thumbnails';
-import {thumbnailsContainer} from '../../elements/thumbnails-elements';
+import {renderThumbnails} from '../../renderers/thumbnails';
+import {thumbnailsContainer} from '../../elements/thumbnails';
 
 const enum Default {
 	DEBOUNCE_TIME = 500

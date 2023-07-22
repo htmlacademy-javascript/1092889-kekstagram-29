@@ -5,9 +5,9 @@ import {
 	imageUploadInput,
 	imageUploadOverlay,
 	submitButton
-} from '../../elements/form-elements';
-import {addEscapeListener, removeModalState, isEscape, removeEscapeListener, addModalState} from '../global-handlers';
-import {resetImagePreview, setForm, unsetForm} from '../../renderers/render-image-form';
+} from '../../elements/img-upload-form';
+import {addEscapeListener, removeModalState, isEscape, removeEscapeListener, addModalState} from '../global';
+import {resetImagePreview, setForm, unsetForm} from '../../renderers/img-upload-form';
 import Pristine from 'pristinejs';
 import {
 	addValidationEngine,
@@ -18,8 +18,8 @@ import {
 import {
 	addEffectListener,
 	addScaleListeners, removeEffect,
-} from './img-change-handlers';
-import {addAlert} from '../alerts-handlers';
+} from './img-change';
+import {addAlert} from '../alerts';
 import {sendData} from '../../../core/api/api';
 
 const IMAGE_EXTENSIONS = ['png', 'jpeg', 'jpg'];

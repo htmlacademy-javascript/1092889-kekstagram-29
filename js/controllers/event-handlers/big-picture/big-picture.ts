@@ -1,8 +1,8 @@
 import {Photo} from '../../../contracts/common';
-import {setBigPicture, unsetBigPicture} from '../../renderers/render-big-picture';
-import {addEscapeListener, removeModalState, isEscape, removeEscapeListener, addModalState} from '../global-handlers';
-import {setComments, unsetComments} from './comments-handlers';
-import {bigPicture, closeButton} from '../../elements/big-picture-elements';
+import {setBigPicture, unsetBigPicture} from '../../renderers/big-picture';
+import {addEscapeListener, removeModalState, isEscape, removeEscapeListener, addModalState} from '../global';
+import {setComments, unsetComments} from './comments';
+import {bigPicture, closeButton} from '../../elements/big-picture';
 
 
 closeButton.addEventListener('click', closeBigPicture);

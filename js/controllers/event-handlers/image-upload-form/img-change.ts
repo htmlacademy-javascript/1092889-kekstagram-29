@@ -3,7 +3,7 @@ import {
 	resetImagePreview,
 	updateImageFilter,
 	updateImageScale
-} from '../../renderers/render-image-form';
+} from '../../renderers/img-upload-form';
 import {scaleDown, scaleUp} from '../../../core/img-transformers/scalers';
 import {effectsMap, ScaleData, Effects} from '../../../core/img-transformers/effects';
 import {API} from 'nouislider';
@@ -16,7 +16,7 @@ import {
 	scaleUpButton,
 	sliderContainer,
 	sliderWrapper
-} from '../../elements/form-elements';
+} from '../../elements/img-upload-form';
 
 let currentSlider: API;
 

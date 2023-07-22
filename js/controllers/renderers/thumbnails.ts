@@ -1,7 +1,7 @@
 import {Photo} from '../../contracts/common';
 import {render} from '../../utils/render';
-import {thumbnailTemplate} from '../elements/template-elements';
-import {thumbnailsContainer} from '../elements/thumbnails-elements';
+import {thumbnailTemplate} from '../elements/template';
+import {thumbnailsContainer} from '../elements/thumbnails';
 const createThumbnailNode = (photo: Photo): HTMLElement => {
 
 	const thumbnail = thumbnailTemplate.cloneNode(true) as HTMLAnchorElement;

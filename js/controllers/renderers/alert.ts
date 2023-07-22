@@ -1,5 +1,5 @@
 import {render} from '../../utils/render';
-import {errorAlertTemplate, successAlertTemplate} from '../elements/template-elements';
+import {errorAlertTemplate, successAlertTemplate} from '../elements/template';
 
 type Alert = 'success' | 'error' | 'custom';
 

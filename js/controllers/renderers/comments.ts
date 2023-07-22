@@ -1,7 +1,7 @@
 import {PhotoComment} from '../../contracts/common';
 import {render} from '../../utils/render';
-import {commentTemplate} from '../elements/template-elements';
-import {commentsContainer} from '../elements/big-picture-elements';
+import {commentTemplate} from '../elements/template';
+import {commentsContainer} from '../elements/big-picture';
 
 const createCommentNode = ({message, name, avatar}:PhotoComment): HTMLLIElement => {
 	const comment = commentTemplate.cloneNode(true) as HTMLLIElement;

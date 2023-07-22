@@ -1,6 +1,6 @@
-import {debouncedRerenderThumbnails} from './thumbnails-handlers';
+import {debouncedRerenderThumbnails} from './thumbnails';
 import {FilterType, getFilteredPhotos} from '../../../core/storage/photos';
-import {filterForm, contentFiltersContainer} from '../../elements/content-filters-elements';
+import {filterForm, contentFiltersContainer} from '../../elements/content-filters';
 
 const changeContentFilterListener = (evt: Event) => {
 	const target = evt.target as HTMLElement;

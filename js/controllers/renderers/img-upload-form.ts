@@ -1,4 +1,4 @@
-import {effectsPreviews, effectValue, imagePreview, scaleValue} from '../elements/form-elements';
+import {effectsPreviews, effectValue, imagePreview, scaleValue} from '../elements/img-upload-form';
 
 const setForm = (imgSrc: string, alt: string) => {
 	imagePreview.src = imgSrc;

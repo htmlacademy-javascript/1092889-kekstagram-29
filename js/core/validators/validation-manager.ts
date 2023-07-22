@@ -1,5 +1,5 @@
-import {updateHashtagValidator} from './hashtag-validators';
-import {updateDescriptionValidator} from './description-validators';
+import {updateHashtagValidator} from './hashtag';
+import {updateDescriptionValidator} from './description';
 
 
 type ValidationName = 'hashtag' | 'description'
