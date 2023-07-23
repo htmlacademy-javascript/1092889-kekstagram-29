@@ -9,7 +9,7 @@ import {resetImagePreview, setForm, unsetForm} from '../../renderers/img-upload-
 import {
 	checkValidity,
 	resetValidity,
-} from '../../validators/img-upload-form.ts';
+} from '../../validators/img-upload-form';
 import {
 	addEffectListener,
 	addScaleListeners, removeEffect,
