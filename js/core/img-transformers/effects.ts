@@ -1,5 +1,5 @@
-type Effects = 'chrome' | 'sepia' | 'marvin' | 'phobos' | 'heat' | 'none'
-type EffectsFilter = 'grayscale' | 'sepia' | 'invert' | 'blur' | 'brightness' | 'none'
+type Effect = 'chrome' | 'sepia' | 'marvin' | 'phobos' | 'heat' | 'none'
+type EffectFilter = 'grayscale' | 'sepia' | 'invert' | 'blur' | 'brightness' | 'none'
 type ScaleData = {
 	min: number,
 	max: number,
@@ -8,12 +8,12 @@ type ScaleData = {
 type Units = '' | 'px' | '%'
 
 interface EffectData {
-	effectType: EffectsFilter,
+	effectType: EffectFilter,
 	scaleData: ScaleData,
 	units: Units
 }
 
-const effectsMap: Map<Omit<Effects, 'none'>, EffectData> = new Map([
+const effectsMap: Map<Omit<Effect, 'none'>, EffectData> = new Map([
 	['chrome', {
 		effectType: 'grayscale',
 		scaleData: 	{min:0,max:1,step:0.1},
@@ -42,4 +42,4 @@ const effectsMap: Map<Omit<Effects, 'none'>, EffectData> = new Map([
 ]);
 
 export {effectsMap};
-export type {Effects, ScaleData, Units};
+export type {Effect, ScaleData, Units};
