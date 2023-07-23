@@ -1,11 +1,9 @@
-import {addValidator} from './validation-manager';
-
 const enum Default {
 	MAX_HASHTAG_COUNT = 5,
 	MAX_HASHTAG_LENGTH = 20
 }
 
-const enum HASHTAG_ERRORS {
+const enum HashtagError {
 	MAX_COUNT = 'Хэш-тэгов должно быть не больше пяти',
 	NON_UNIQUE = 'Хэш-теги повторяются',
 	HASH_START = 'Хэш-тег должен начинаться с решётки',
@@ -14,8 +12,9 @@ const enum HASHTAG_ERRORS {
 	ONLY_HASH = 'Хэш-тег не может состоять из одной решётки'
 }
 
-let hashtagsError = '';
+let hashtagError = '';
 
+const getHashtagError = () => hashtagError;
 
 const HASHTAG_TEMPLATE = new RegExp(/^#[a-zа-яё0-9]{1,19}$/);
 
@@ -37,31 +36,31 @@ const validateHashtags = (value: string) => {
 	const hashtags = value.trim().toLocaleLowerCase().split(/\s+/);
 
 	if(!isUniqueHashtags((hashtags))) {
-		hashtagsError = HASHTAG_ERRORS.NON_UNIQUE;
+		hashtagError = HashtagError.NON_UNIQUE;
 		return false;
 	}
 	if(!isMaxCount(hashtags)) {
-		hashtagsError = HASHTAG_ERRORS.MAX_COUNT;
+		hashtagError = HashtagError.MAX_COUNT;
 		return false;
 	}
 
 	return hashtags.every((hashtag) => {
 		if (!isStartsWithHashtag(hashtag)) {
-			hashtagsError = HASHTAG_ERRORS.HASH_START;
+			hashtagError = HashtagError.HASH_START;
 			return false;
 		}
 
 		if (hashtag === '#') {
-			hashtagsError = HASHTAG_ERRORS.ONLY_HASH;
+			hashtagError = HashtagError.ONLY_HASH;
 			return false;
 		}
 
 		if (!isRequiredLength(hashtag)) {
-			hashtagsError = HASHTAG_ERRORS.HASH_LENGTH;
+			hashtagError = HashtagError.HASH_LENGTH;
 			return false;
 		}
 		if (!isValidHashtag(hashtag)) {
-			hashtagsError = HASHTAG_ERRORS.HASH_CHARACTERS;
+			hashtagError = HashtagError.HASH_CHARACTERS;
 			return false;
 		}
 
@@ -69,9 +68,5 @@ const validateHashtags = (value: string) => {
 	});
 };
 
-const updateHashtagValidator = () => {
-	addValidator('hashtag',{validator: validateHashtags, error: () => hashtagsError});
-};
 
-
-export {updateHashtagValidator};
+export {validateHashtags, getHashtagError};

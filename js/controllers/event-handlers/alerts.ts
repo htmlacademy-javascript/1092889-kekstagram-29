@@ -1,22 +1,21 @@
-import {showAlert} from '../renderers/render-alert';
-import {Alert} from '../renderers/render-alert';
-import {addEscapeListener, removeModal, isEscape, removeEscapeListener, addModal} from './global-handlers';
+import {showAlert} from '../renderers/alert';
+import {Alert} from '../renderers/alert';
+import {addEscapeListener, isEscape, removeEscapeListener} from './global';
 
 const enum Default {
 	ALERT_DURATION = 3000
 }
 
-let currentAlertElement: HTMLElement;
+let currentAlertNode: HTMLElement;
 let alertCloseButton: HTMLButtonElement;
 let alertInner: HTMLDivElement;
-let alertType: Alert;
 const escapeAlertListener = (evt: KeyboardEvent) => {
 	if(isEscape(evt)) {
 		removeAlert();
 	}
 };
 
-const addOutsideListener = (evt: Event) => {
+const overlayClickListener = (evt: Event) => {
 	evt.stopPropagation();
 	const targetElement = evt.target as HTMLElement;
 	if(targetElement.closest('div') !== alertInner) {
@@ -24,13 +23,13 @@ const addOutsideListener = (evt: Event) => {
 	}
 };
 const addAlertListeners = () => {
+	currentAlertNode.addEventListener('click', overlayClickListener);
 	alertCloseButton!.addEventListener('click', removeAlert);
-	currentAlertElement.addEventListener('click', addOutsideListener);
 	addEscapeListener(escapeAlertListener);
 };
 const removeAlertListeners = () => {
+	currentAlertNode.removeEventListener('click', overlayClickListener);
 	alertCloseButton!.removeEventListener('click', removeAlert);
-	currentAlertElement.removeEventListener('click', addOutsideListener);
 	removeEscapeListener(escapeAlertListener);
 };
 
@@ -41,19 +40,14 @@ const addAlert = (type: Alert, message = '') => {
 		setTimeout(() => alert.remove(), Default.ALERT_DURATION);
 		return;
 	}
-	currentAlertElement = (showAlert(type,message));
-	alertType = type;
-	alertCloseButton = currentAlertElement.querySelector<HTMLButtonElement>('button')!;
-	alertInner = currentAlertElement.querySelector<HTMLDivElement>('div')!;
+	currentAlertNode = (showAlert(type,message));
+	alertCloseButton = currentAlertNode.querySelector<HTMLButtonElement>('button')!;
+	alertInner = currentAlertNode.querySelector<HTMLDivElement>('div')!;
 	addAlertListeners();
-	addModal();
 };
 function removeAlert () {
 	removeAlertListeners();
-	if(alertType !== 'error') {
-		removeModal();
-	}
-	currentAlertElement.remove();
+	currentAlertNode.remove();
 }
 
 
