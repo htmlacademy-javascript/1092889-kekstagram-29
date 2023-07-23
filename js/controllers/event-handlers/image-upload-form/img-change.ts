@@ -5,7 +5,7 @@ import {
 	updateImageScale
 } from '../../renderers/img-upload-form';
 import {scaleDown, scaleUp} from '../../../core/img-transformers/scalers';
-import {effectsMap, ScaleData, Effects} from '../../../core/img-transformers/effects';
+import {effectsMap, ScaleData, Effect} from '../../../core/img-transformers/effects';
 import {API} from 'nouislider';
 import * as noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
@@ -56,7 +56,7 @@ const changeEffectListener = (evt: Event) => {
 		resetEffect();
 		return;
 	}
-	const effectValue = effect.value as Effects;
+	const effectValue = effect.value as Effect;
 	sliderContainer.hidden = false;
 
 	const {effectType, scaleData, units} = effectsMap.get(effectValue)!;
