@@ -59,9 +59,8 @@ const changeEffectListener = (evt: Event) => {
 	const effectValue = effect.value as Effect;
 	sliderContainer.hidden = false;
 
-	const {effectType, scaleData, units} = effectsMap.get(effectValue)!;
+	const {scaleData} = effectsMap.get(effectValue)!;
 	currentSlider = createSlider(scaleData);
-	updateImageFilter(effectType, `${scaleData.max}${units}`);
 	currentSlider.on('update', updateEffectListener);
 };
 
