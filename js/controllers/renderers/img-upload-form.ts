@@ -1,4 +1,5 @@
 import {effectsPreviews, effectValue, imagePreview, scaleValue} from '../elements/img-upload-form';
+import {convertToPercent} from '../../utils/converter';
 
 const setForm = (imgSrc: string, alt: string) => {
 	imagePreview.src = imgSrc;
@@ -16,7 +17,7 @@ const unsetForm = () => {
 
 const updateImageScale = (imageScale: number) => {
 	scaleValue.value = `${imageScale}%`;
-	imagePreview.style.transform = `scale(${(imageScale / 100).toString()})`;
+	imagePreview.style.transform = `scale(${convertToPercent(imageScale).toString()})`;
 };
 
 const updateImageFilter = (type: string, value: string) => {
